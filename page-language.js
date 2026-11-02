@@ -7,6 +7,8 @@
     "本图仅表达地点的相对方位与路线顺序，不代表真实比例或精确地理边界。": "This map shows relative direction and route order only. It is not to scale and is not an exact boundary.",
     "路线为行程示意，实际驾驶和步行请使用当天的 Google Maps 导航。": "The route is a sketch. Use that day’s Google Maps for driving and walking.",
     "地图需要能够访问 Google 的网络。若一直空白，请在系统浏览器中打开。": "The map needs a network that can reach Google. If it stays blank, open it in the system browser.",
+    "地图在当前页面的小窗口里显示。若一直空白，再用百度地图打开。": "The map opens in a small window on this page. If it stays blank, open Baidu Maps.",
+    "用百度地图打开 ↗": "Open in Baidu Maps ↗",
     "请确认 trip-data.json 已通过生成校验，并与网页位于同一目录。": "Check that trip-data.json passed validation and sits in the same folder as this page.",
     "建议 ${time} 抵达机场区域，预留还车及值机时间。": "Arrive at the airport area by the suggested time, leaving time to return the vehicle and check in.",
     "预约还车时间已过 · 如尚未还车，请立即联系租车公司": "The reserved return time has passed. If the vehicle is not back, contact the rental company now.",

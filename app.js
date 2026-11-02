@@ -546,26 +546,18 @@ function placeCoordinates(place) {
   return Number.isFinite(lat) && Number.isFinite(lng) ? { lat, lng } : null;
 }
 
-function baiduPlaceUrls(place) {
+function baiduEmbedUrl(place) {
   const name = place.nameZh || place.name || "";
   const area = place.cityOrArea || "";
   const mapped = (state.data.map?.places || []).find((item) => item.id === place.id);
   const geo = placeCoordinates(place);
-  const src = "webapp.chengdu-bps";
+  const title = encodeURIComponent(name);
   if (geo) {
-    const location = `${geo.lat},${geo.lng}`;
-    const title = encodeURIComponent(name);
-    return {
-      web: `https://api.map.baidu.com/marker?location=${location}&title=${title}&content=${title}&output=html&src=${src}`,
-      app: `baidumap://map/marker?location=${location}&title=${title}&content=${title}&src=${src}`
-    };
+    return `https://map.baidu.com/?latlng=${geo.lat},${geo.lng}&title=${title}&content=${title}&autoOpen=true`;
   }
   const query = place.navigation?.query || mapped?.query || `${area}${name}`;
   const region = /成都|九寨沟/.test(area) ? area : (area || (/九寨|沟|海|池|瀑|寺|寨|机场|酒店/.test(name) ? "九寨沟" : "成都"));
-  return {
-    web: `https://map.baidu.com/search?query=${encodeURIComponent(query)}&region=${encodeURIComponent(region)}`,
-    app: `baidumap://map/search?query=${encodeURIComponent(query)}&region=${encodeURIComponent(region)}&src=${src}`
-  };
+  return `https://map.baidu.com/search?query=${encodeURIComponent(query)}&region=${encodeURIComponent(region)}`;
 }
 
 function placeNameInText(name, text) {
@@ -603,35 +595,14 @@ function schedulePlaceMarkup(item) {
   let html = "";
   let index = 0;
   chosen.forEach((match) => {
-    const urls = baiduPlaceUrls(match.place);
+    const embed = baiduEmbedUrl(match.place);
     const label = text.slice(match.index, match.index + match.length);
     const official = match.place.nameZh || match.place.name || label;
     html += escapeHtml(text.slice(index, match.index));
-    html += `<a class="schedule-place" href="${escapeHtml(urls.web)}" data-app-url="${escapeHtml(urls.app)}" target="_blank" rel="noopener noreferrer" aria-label="在百度地图打开${escapeHtml(official)}">${escapeHtml(label)}</a>`;
+    html += `<button type="button" class="schedule-place" data-baidu-src="${escapeHtml(embed)}" data-map-label="${escapeHtml(official)}" aria-haspopup="dialog" aria-controls="place-map" aria-label="在百度地图打开${escapeHtml(official)}">${escapeHtml(label)}</button>`;
     index = match.index + match.length;
   });
   return html + escapeHtml(text.slice(index));
-}
-
-function openSchedulePlace(event, link) {
-  const mobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
-  const app = link.dataset.appUrl || "";
-  if (!mobile || !app.startsWith("baidumap:")) return;
-  event.preventDefault();
-  event.stopPropagation();
-  const web = link.href;
-  let hidden = false;
-  const markHidden = () => { if (document.hidden) hidden = true; };
-  document.addEventListener("visibilitychange", markHidden);
-  const frame = document.createElement("iframe");
-  frame.hidden = true;
-  frame.src = app;
-  document.body.appendChild(frame);
-  window.setTimeout(() => {
-    document.removeEventListener("visibilitychange", markHidden);
-    frame.remove();
-    if (!hidden) window.open(web, "_blank", "noopener,noreferrer");
-  }, 900);
 }
 
 function dayCard(day) {
@@ -756,11 +727,7 @@ function renderTimeline() {
   $("#day-count").textContent = `${state.data.days.length} DAYS`;
   $("#timeline").innerHTML = state.data.days.map(dayCard).join("");
   $("#timeline").onclick = (event) => {
-    const placeLink = event.target.closest("a.schedule-place");
-    if (placeLink) {
-      openSchedulePlace(event, placeLink);
-      return;
-    }
+    if (event.target.closest("button.schedule-place")) return;
     const ticketButton = event.target.closest("[data-ticket-open]");
     if (ticketButton) {
       openTicketDialog(ticketButton.dataset.ticketOpen, ticketButton);
@@ -1114,6 +1081,8 @@ function setupTicketDialog() {
 function setupPlaceMap() {
   const panel = $("#place-map");
   const frame = $("#place-map-frame");
+  const note = $("#place-map-note");
+  const external = $("#place-map-external");
   let opener;
   let previousOverflow = "";
   const close = () => {
@@ -1122,19 +1091,52 @@ function setupPlaceMap() {
     document.body.style.overflow = previousOverflow;
     opener?.focus();
   };
-  document.addEventListener("click", (event) => {
-    const link = event.target.closest("button[data-map-query]");
-    if (!link) return;
-    event.preventDefault();
-    opener = link;
-    $("#place-map-title").textContent = tr(link.dataset.mapLabel);
-    $("#place-map-external").href = safeExternalUrl(link.dataset.mapUrl) || mapsSearch(link.dataset.mapQuery);
-    frame.title = `${link.dataset.mapLabel} Google Maps`;
-    frame.src = `https://maps.google.com/maps?q=${encodeURIComponent(link.dataset.mapQuery)}&output=embed`;
+  const show = (source, label, frameSrc, externalHref, frameTitle, noteText, externalText) => {
+    opener = source;
+    $("#place-map-title").textContent = tr(label);
+    note.textContent = tr(noteText);
+    external.textContent = tr(externalText);
+    external.href = externalHref;
+    frame.title = frameTitle;
+    frame.src = "about:blank";
     previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     panel.hidden = false;
     $("#place-map-close").focus();
+    window.requestAnimationFrame(() => {
+      frame.src = frameSrc;
+    });
+  };
+  document.addEventListener("click", (event) => {
+    const schedulePlace = event.target.closest("button.schedule-place");
+    if (schedulePlace) {
+      event.preventDefault();
+      const src = safeExternalUrl(schedulePlace.dataset.baiduSrc);
+      if (!src) return;
+      const label = schedulePlace.dataset.mapLabel || schedulePlace.textContent.trim();
+      show(
+        schedulePlace,
+        label,
+        src,
+        src,
+        `${label} 百度地图`,
+        "地图在当前页面的小窗口里显示。若一直空白，再用百度地图打开。",
+        "用百度地图打开 ↗"
+      );
+      return;
+    }
+    const link = event.target.closest("button[data-map-query]");
+    if (!link) return;
+    event.preventDefault();
+    show(
+      link,
+      link.dataset.mapLabel,
+      `https://maps.google.com/maps?q=${encodeURIComponent(link.dataset.mapQuery)}&output=embed`,
+      safeExternalUrl(link.dataset.mapUrl) || mapsSearch(link.dataset.mapQuery),
+      `${link.dataset.mapLabel} Google Maps`,
+      "地图需要能够访问 Google 的网络。若一直空白，请在系统浏览器中打开。",
+      "用 Google Maps 打开 ↗"
+    );
   });
   $("#place-map-close").onclick = close;
   panel.addEventListener("click", (event) => { if (event.target === panel) close(); });
