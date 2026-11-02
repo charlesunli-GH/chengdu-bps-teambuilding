@@ -530,23 +530,122 @@ function inlineTicketMarkup(ticket) {
     </div>`;
 }
 
+function itineraryPlaces(item) {
+  const ids = [...new Set([
+    ...(Array.isArray(item.placeIds) ? item.placeIds : []),
+    ...(item.placeId ? [item.placeId] : [])
+  ])];
+  return ids.map((id) => (state.data.places || []).find((place) => place.id === id)).filter(Boolean);
+}
+
+function placeCoordinates(place) {
+  const mapped = (state.data.map?.places || []).find((item) => item.id === place.id);
+  const geo = place.geo || mapped?.geo;
+  const lat = Number(geo?.lat);
+  const lng = Number(geo?.lng);
+  return Number.isFinite(lat) && Number.isFinite(lng) ? { lat, lng } : null;
+}
+
+function baiduPlaceUrls(place) {
+  const name = place.nameZh || place.name || "";
+  const area = place.cityOrArea || "";
+  const mapped = (state.data.map?.places || []).find((item) => item.id === place.id);
+  const geo = placeCoordinates(place);
+  const src = "webapp.chengdu-bps";
+  if (geo) {
+    const location = `${geo.lat},${geo.lng}`;
+    const title = encodeURIComponent(name);
+    return {
+      web: `https://api.map.baidu.com/marker?location=${location}&title=${title}&content=${title}&output=html&src=${src}`,
+      app: `baidumap://map/marker?location=${location}&title=${title}&content=${title}&src=${src}`
+    };
+  }
+  const query = place.navigation?.query || mapped?.query || `${area}${name}`;
+  const region = /成都|九寨沟/.test(area) ? area : (area || (/九寨|沟|海|池|瀑|寺|寨|机场|酒店/.test(name) ? "九寨沟" : "成都"));
+  return {
+    web: `https://map.baidu.com/search?query=${encodeURIComponent(query)}&region=${encodeURIComponent(region)}`,
+    app: `baidumap://map/search?query=${encodeURIComponent(query)}&region=${encodeURIComponent(region)}&src=${src}`
+  };
+}
+
+function placeNameInText(name, text) {
+  if (!name) return null;
+  const exact = text.indexOf(name);
+  if (exact >= 0) return { index: exact, length: name.length };
+  const prefixes = ["成都", "九寨沟", "平武"];
+  const prefix = prefixes.find((item) => name.startsWith(item) && name.length - item.length >= 3);
+  if (!prefix) return null;
+  const rest = name.slice(prefix.length);
+  const index = text.indexOf(rest);
+  return index >= 0 ? { index, length: rest.length } : null;
+}
+
+function mealHasNamedRestaurant(item) {
+  const text = String(item.text || "");
+  return (state.data.restaurants || []).some((restaurant) => restaurant?.name && text.includes(restaurant.name));
+}
+
+function schedulePlaceMarkup(item) {
+  const text = String(item.text || "");
+  if (!text || (item.type === "restaurant" && !mealHasNamedRestaurant(item))) return escapeHtml(text);
+  const matches = itineraryPlaces(item).flatMap((place) => {
+    const found = placeNameInText(place.nameZh || place.name || "", text);
+    return found ? [{ ...found, place }] : [];
+  }).sort((first, second) => first.index - second.index || second.length - first.length);
+  const chosen = [];
+  let cursor = 0;
+  matches.forEach((match) => {
+    if (match.index < cursor) return;
+    chosen.push(match);
+    cursor = match.index + match.length;
+  });
+  if (!chosen.length) return escapeHtml(text);
+  let html = "";
+  let index = 0;
+  chosen.forEach((match) => {
+    const urls = baiduPlaceUrls(match.place);
+    const label = text.slice(match.index, match.index + match.length);
+    const official = match.place.nameZh || match.place.name || label;
+    html += escapeHtml(text.slice(index, match.index));
+    html += `<a class="schedule-place" href="${escapeHtml(urls.web)}" data-app-url="${escapeHtml(urls.app)}" target="_blank" rel="noopener noreferrer" aria-label="在百度地图打开${escapeHtml(official)}">${escapeHtml(label)}</a>`;
+    index = match.index + match.length;
+  });
+  return html + escapeHtml(text.slice(index));
+}
+
+function openSchedulePlace(event, link) {
+  const mobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+  const app = link.dataset.appUrl || "";
+  if (!mobile || !app.startsWith("baidumap:")) return;
+  event.preventDefault();
+  event.stopPropagation();
+  const web = link.href;
+  let hidden = false;
+  const markHidden = () => { if (document.hidden) hidden = true; };
+  document.addEventListener("visibilitychange", markHidden);
+  const frame = document.createElement("iframe");
+  frame.hidden = true;
+  frame.src = app;
+  document.body.appendChild(frame);
+  window.setTimeout(() => {
+    document.removeEventListener("visibilitychange", markHidden);
+    frame.remove();
+    if (!hidden) window.open(web, "_blank", "noopener,noreferrer");
+  }, 900);
+}
+
 function dayCard(day) {
   const today = todayForTrip();
   const isToday = day.date === today;
   const expanded = state.expandedDay === day.day;
   const schedule = day.schedule.map((item) => {
-    const destinations = navigationDestinations(item);
-    const mapLinks = destinations.map((destination) => `
-      <button type="button" class="schedule-map-link" data-map-query="${escapeHtml(destination.query)}" data-map-url="${escapeHtml(destination.url || "")}" data-map-label="${escapeHtml(destination.label)}" aria-haspopup="dialog" aria-controls="place-map" aria-label="查看 ${escapeHtml(destination.label)} 的地图">📍 ${escapeHtml(destination.label)}</button>
-    `).join("");
     const scheduleTickets = ticketsForSchedule(day, item).map(inlineTicketMarkup).join("");
     return `
       <li class="schedule-item">
         <span class="schedule-time">${escapeHtml(item.time)}</span>
         <div class="schedule-content">
-          <div class="schedule-text">${escapeHtml(item.text)}</div>
+          <div class="schedule-text">${schedulePlaceMarkup(item)}</div>
           ${scheduleTickets}
-          ${mapLinks ? `<div class="schedule-map-links">${mapLinks}</div>` : ""}
         </div>
       </li>
     `;
@@ -657,6 +756,11 @@ function renderTimeline() {
   $("#day-count").textContent = `${state.data.days.length} DAYS`;
   $("#timeline").innerHTML = state.data.days.map(dayCard).join("");
   $("#timeline").onclick = (event) => {
+    const placeLink = event.target.closest("a.schedule-place");
+    if (placeLink) {
+      openSchedulePlace(event, placeLink);
+      return;
+    }
     const ticketButton = event.target.closest("[data-ticket-open]");
     if (ticketButton) {
       openTicketDialog(ticketButton.dataset.ticketOpen, ticketButton);

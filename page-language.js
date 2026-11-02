@@ -36,6 +36,7 @@
     "成都 → 九寨沟": "Chengdu → Jiuzhai",
     "成都 → 上海": "Chengdu → Shanghai",
     "北京时间 UTC+8": "China Standard Time, UTC+8",
+    "在百度地图打开": "Open in Baidu Maps: ",
     "航班卡片，可左右滑动或使用两侧按钮翻页": "Flight cards. Swipe, or use the buttons on either side.",
     "上一张登机牌": "Previous boarding pass",
     "下一张登机牌": "Next boarding pass",
