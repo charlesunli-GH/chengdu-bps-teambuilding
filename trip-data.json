@@ -77,8 +77,8 @@
   },
   "flightJourneys": [
     {
-      "id": "rec-out-ca8593",
-      "title": "去程 · 上海浦东—成都双流T2",
+      "id": "rec-out-ca8591",
+      "title": "去程 · 上海浦东T2—成都双流T2",
       "status": "confirmed"
     },
     {
@@ -89,21 +89,21 @@
   ],
   "flights": [
     {
-      "id": "flight-ca8593",
-      "journeyId": "rec-out-ca8593",
+      "id": "flight-ca8591",
+      "journeyId": "rec-out-ca8591",
       "sequence": 1,
       "airline": {
         "name": "Air China",
         "nameZh": "中国国际航空"
       },
-      "flightNumber": "CA8593",
+      "flightNumber": "CA8591",
       "bookingStatus": "confirmed",
       "departure": {
         "airportCode": "PVG",
         "city": "上海",
-        "airportName": "浦东",
+        "airportName": "浦东T2",
         "date": "2026-11-05",
-        "time": "09:00",
+        "time": "07:40",
         "utcOffset": "+08:00"
       },
       "arrival": {
@@ -111,7 +111,7 @@
         "city": "成都",
         "airportName": "双流T2",
         "date": "2026-11-05",
-        "time": "12:25",
+        "time": "11:25",
         "utcOffset": "+08:00"
       }
     },
@@ -181,7 +181,7 @@
           "id": "d1-arrive",
           "time": "14:00",
           "type": "drive",
-          "text": "抵达成都双流机场，机场取车自驾前往酒店。去程上海浦东—成都双流T2 CA8593 09:00–12:25。租车公司、车型、订单、费用、车牌和精确取还车时刻待确认。",
+          "text": "抵达成都双流机场，机场取车自驾前往酒店。去程上海浦东T2—成都双流T2 CA8591 07:40–11:25。租车公司、车型、订单、费用、车牌和精确取还车时刻待确认。",
           "placeIds": [
             "ctu",
             "donganhu"

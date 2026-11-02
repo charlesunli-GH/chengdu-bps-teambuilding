@@ -538,26 +538,15 @@ function itineraryPlaces(item) {
   return ids.map((id) => (state.data.places || []).find((place) => place.id === id)).filter(Boolean);
 }
 
-function placeCoordinates(place) {
+function googlePlaceTarget(place) {
   const mapped = (state.data.map?.places || []).find((item) => item.id === place.id);
-  const geo = place.geo || mapped?.geo;
-  const lat = Number(geo?.lat);
-  const lng = Number(geo?.lng);
-  return Number.isFinite(lat) && Number.isFinite(lng) ? { lat, lng } : null;
-}
-
-function baiduEmbedUrl(place) {
   const name = place.nameZh || place.name || "";
   const area = place.cityOrArea || "";
-  const mapped = (state.data.map?.places || []).find((item) => item.id === place.id);
-  const geo = placeCoordinates(place);
-  const title = encodeURIComponent(name);
-  if (geo) {
-    return `https://map.baidu.com/?latlng=${geo.lat},${geo.lng}&title=${title}&content=${title}&autoOpen=true`;
-  }
-  const query = place.navigation?.query || mapped?.query || `${area}${name}`;
-  const region = /成都|九寨沟/.test(area) ? area : (area || (/九寨|沟|海|池|瀑|寺|寨|机场|酒店/.test(name) ? "九寨沟" : "成都"));
-  return `https://map.baidu.com/search?query=${encodeURIComponent(query)}&region=${encodeURIComponent(region)}`;
+  return {
+    label: name,
+    query: place.navigation?.query || place.googleMapsQuery || mapped?.query || place.address || `${name}${area ? `, ${area}` : ""}`,
+    url: place.navigation?.url || place.googleMapsUrl || ""
+  };
 }
 
 function placeNameInText(name, text) {
@@ -595,11 +584,11 @@ function schedulePlaceMarkup(item) {
   let html = "";
   let index = 0;
   chosen.forEach((match) => {
-    const embed = baiduEmbedUrl(match.place);
+    const target = googlePlaceTarget(match.place);
     const label = text.slice(match.index, match.index + match.length);
-    const official = match.place.nameZh || match.place.name || label;
+    const official = target.label || label;
     html += escapeHtml(text.slice(index, match.index));
-    html += `<button type="button" class="schedule-place" data-baidu-src="${escapeHtml(embed)}" data-map-label="${escapeHtml(official)}" aria-haspopup="dialog" aria-controls="place-map" aria-label="在百度地图打开${escapeHtml(official)}">${escapeHtml(label)}</button>`;
+    html += `<button type="button" class="schedule-place" data-map-query="${escapeHtml(target.query)}" data-map-url="${escapeHtml(target.url)}" data-map-label="${escapeHtml(official)}" aria-haspopup="dialog" aria-controls="place-map" aria-label="查看 ${escapeHtml(official)} 的地图">${escapeHtml(label)}</button>`;
     index = match.index + match.length;
   });
   return html + escapeHtml(text.slice(index));
@@ -1108,23 +1097,6 @@ function setupPlaceMap() {
     });
   };
   document.addEventListener("click", (event) => {
-    const schedulePlace = event.target.closest("button.schedule-place");
-    if (schedulePlace) {
-      event.preventDefault();
-      const src = safeExternalUrl(schedulePlace.dataset.baiduSrc);
-      if (!src) return;
-      const label = schedulePlace.dataset.mapLabel || schedulePlace.textContent.trim();
-      show(
-        schedulePlace,
-        label,
-        src,
-        src,
-        `${label} 百度地图`,
-        "地图在当前页面的小窗口里显示。若一直空白，再用百度地图打开。",
-        "用百度地图打开 ↗"
-      );
-      return;
-    }
     const link = event.target.closest("button[data-map-query]");
     if (!link) return;
     event.preventDefault();
