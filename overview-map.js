@@ -132,31 +132,6 @@ function routeLayersFor(source) {
   }));
 }
 
-function featureSketchBody(kind) {
-  const frame = `<rect width="64" height="36" rx="6" fill="#f7f4ea" stroke="#092653" stroke-width="1.2"/>`;
-  const scenes = {
-    pools: `${frame}<ellipse cx="18" cy="20" rx="11" ry="7" fill="#2aa7a1"/><ellipse cx="34" cy="14" rx="9" ry="6" fill="#e2b15a"/><ellipse cx="48" cy="22" rx="10" ry="6" fill="#6d8adf"/>`,
-    "pearl-falls": `${frame}<path d="M8 8h48v6H8z" fill="#8d9aa3"/><path d="M14 14c4 14 8 14 12 0 4 14 8 14 12 0 4 14 8 14 12 0v8H14z" fill="#7eb6d8"/><circle cx="22" cy="24" r="1.4" fill="#f7f4ea"/><circle cx="32" cy="27" r="1.4" fill="#f7f4ea"/><circle cx="42" cy="23" r="1.4" fill="#f7f4ea"/>`,
-    "long-lake": `${frame}<path d="M6 20c8-8 16-8 24 0s16 8 28 0v8c-12 6-20 2-28-4s-16-4-24 0z" fill="#3c88c8"/>`,
-    "color-pools": `${frame}<circle cx="16" cy="18" r="5" fill="#2aa7a1"/><circle cx="28" cy="14" r="4" fill="#e2b15a"/><circle cx="38" cy="22" r="5" fill="#d36b8d"/><circle cx="50" cy="16" r="4" fill="#6d8adf"/>`,
-    "wide-falls": `${frame}<path d="M6 7h52v5H6z" fill="#6d7c86"/><path d="M8 12h48v16H8z" fill="#8ec4e2"/><path d="M14 12v16M24 12v16M34 12v16M44 12v16M54 12v16" stroke="#f7f4ea" stroke-width="1.4"/>`,
-    "ming-temple": `${frame}<path d="M8 16h48L44 10H20z" fill="#b4533a"/><path d="M14 22h36l-4-6H18z" fill="#d97858"/><rect x="28" y="22" width="8" height="10" fill="#5c4636"/>`,
-    "baima-village": `${frame}<path d="M8 24 18 16l10 8v8H8z" fill="#c47a4a"/><path d="M30 26 40 18l12 8v6H30z" fill="#d9a066"/><path d="M46 20c2-6 8-6 8 0-3 1-5 4-8 4s-5-3-8-4z" fill="#f7f4ea" stroke="#092653" stroke-width="1"/>`
-  };
-  return scenes[kind] || "";
-}
-
-function featureSketchMarkup(place, esc) {
-  const kind = String(place.featureSketch || "");
-  const body = featureSketchBody(kind);
-  if (!body) return "";
-  const anchor = place.anchor === "end" ? "end" : "start";
-  const lines = Array.isArray(place.lines) && place.lines.length ? place.lines.length : 1;
-  const x = anchor === "end" ? Number(place.tx) - 68 : Number(place.tx);
-  const y = Number(place.ty) + (lines - 1) * 31 + 10;
-  return `<g id="overview-sketch-${esc(place.id)}" transform="translate(${x.toFixed(1)} ${y.toFixed(1)})" data-feature-sketch="${esc(kind)}">${body}</g>`;
-}
-
 function travelOverviewArtwork(days, source = {}, options = {}) {
   const routeLayers = routeLayersFor(source);
   const allPlaceLayers = placeLayersFor(source);
@@ -181,7 +156,6 @@ function travelOverviewArtwork(days, source = {}, options = {}) {
   <title>${esc(source.title || "虚构示例旅行路线")}</title>
   <desc>${esc(source.description || "原创虚构底图、旅行路线、地点标记和日期图例。")}</desc>
   <g id="overview-background" inkscape:groupmode="layer" inkscape:label="底图"><image href="${esc(baseHref)}" width="${canvas.width}" height="${canvas.height}" preserveAspectRatio="none"/></g>
-  <g id="overview-feature-sketches" inkscape:groupmode="layer" inkscape:label="景区特色">${placeLayers.map((place) => featureSketchMarkup(place, esc)).join("")}</g>
   ${routeLayers.map((route) => `<g id="overview-route-${route.day}" inkscape:groupmode="layer" inkscape:label="${esc(days.find((day) => day.day === route.day)?.date || route.day)}" data-date="${esc(days.find((day) => day.day === route.day)?.date || "")}" fill="none" stroke-linecap="round" stroke-linejoin="round">${pathsFor(route).map((path) => `<path d="${esc(path)}" stroke="${esc(route.color)}" stroke-width="7"/><path d="${esc(path)}" stroke="#ffffff" stroke-opacity=".22" stroke-width="2"/>`).join("")}</g>`).join("")}
   <g id="overview-markers" inkscape:groupmode="layer" inkscape:label="地点标记">${placeLayers.map((place) => `<circle id="overview-point-${esc(place.id)}" cx="${place.x}" cy="${place.y}" r="10.5" fill="${esc(place.color)}" stroke="#fafaf4" stroke-width="2.5"/>`).join("")}</g>
   <g id="overview-place-names" inkscape:groupmode="layer" inkscape:label="地点名称" fill="#092653" stroke="#092653" stroke-width="0.4" stroke-linejoin="round" paint-order="stroke fill" font-family="'Times New Roman', 'Kaiti SC', STKaiti, KaiTi, 'Songti SC', serif" font-weight="700">${placeLayers.map((place) => `<text id="overview-label-${esc(place.id)}" x="${place.tx}" y="${place.ty}" text-anchor="${esc(place.anchor || "start")}" font-size="${place.size}">${multilineText(place.lines, place.tx)}</text>`).join("")}</g>

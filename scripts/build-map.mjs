@@ -300,13 +300,6 @@ function localFeatureOf(place) {
   return String(place?.localFeature || "").replace(/\s+/g, " ").trim();
 }
 
-const FEATURE_SKETCHES = new Set(["pools", "pearl-falls", "long-lake", "color-pools", "wide-falls", "ming-temple", "baima-village"]);
-
-function featureSketchOf(place) {
-  const sketch = String(place?.featureSketch || "").trim();
-  return FEATURE_SKETCHES.has(sketch) ? sketch : "";
-}
-
 function labelTextWidth(text, fontSize) {
   let width = 0;
   for (const char of String(text || "")) {
@@ -320,18 +313,16 @@ function labelTextWidth(text, fontSize) {
 
 function labelMetrics(place) {
   const feature = localFeatureOf(place);
-  const sketch = featureSketchOf(place);
   const primary = String(place.name || place.nameZh || place.id || "");
   const secondary = place.nameZh && place.nameZh !== primary ? String(place.nameZh) : "";
   const legacyWidth = Math.max(154, Math.min(330, Math.max(String(place.name || "").length, String(place.nameZh || "").length * 2) * 13));
-  const sketchHeight = sketch ? 46 : 0;
-  if (!feature && !sketch) return { feature: "", sketch: "", width: legacyWidth, height: 58, lines: secondary ? [`${primary} /`, secondary] : [primary] };
-  const measured = Math.max(labelTextWidth(primary, 24), secondary ? labelTextWidth(secondary, 24) : 0, labelTextWidth(feature, 24), sketch ? 72 : 0);
+  if (!feature) return { feature: "", width: legacyWidth, height: 58, lines: secondary ? [`${primary} /`, secondary] : [primary] };
+  const measured = Math.max(labelTextWidth(primary, 24), secondary ? labelTextWidth(secondary, 24) : 0, labelTextWidth(feature, 24));
   const width = Math.max(legacyWidth, Math.min(360, Math.ceil(measured)));
-  const extraLines = (secondary ? 1 : 0) + (feature ? 1 : 0);
+  const extraLines = (secondary ? 1 : 0) + 1;
   const lines = secondary ? [`${primary} /`, secondary] : [primary];
-  if (feature && feature !== primary && feature !== secondary) lines.push(feature);
-  return { feature, sketch, width, height: Math.max(58, 26 + extraLines * 31 + 6) + sketchHeight, lines };
+  if (feature !== primary && feature !== secondary) lines.push(feature);
+  return { feature, width, height: Math.max(58, 26 + extraLines * 31 + 6), lines };
 }
 
 function labelFor(place, index, occupied) {
@@ -476,7 +467,7 @@ function buildRegion(mapData, manifest) {
     const label = labelFor(colored, index, occupied);
     const primary = place.name || place.nameZh || place.id;
     const metrics = labelMetrics(place);
-    return { id: place.id, ...point, color: colored.color, tx: Number(label.x.toFixed(2)), ty: Number(label.y.toFixed(2)), size: 24, anchor: label.anchor, lines: metrics.lines, ...(metrics.feature ? { localFeature: metrics.feature } : {}), ...(metrics.sketch ? { featureSketch: metrics.sketch } : {}), query: place.query || `${primary} ${mapData.region.label}`, geo: place.geo, days };
+    return { id: place.id, ...point, color: colored.color, tx: Number(label.x.toFixed(2)), ty: Number(label.y.toFixed(2)), size: 24, anchor: label.anchor, lines: metrics.lines, ...(metrics.feature ? { localFeature: metrics.feature } : {}), query: place.query || `${primary} ${mapData.region.label}`, geo: place.geo, days };
   });
   const placeById = new Map(renderedPlaces.map((place) => [place.id, place]));
   const overviewPlaceIds = overviewPlaces(mapData.places, mapData.routes);

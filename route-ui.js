@@ -82,18 +82,6 @@ function mapArtwork(source, selected, id, viewport) {
     label.setAttribute("text-anchor", labelLayout.anchor || "start");
     label.querySelectorAll("tspan").forEach((line) => line.setAttribute("x", labelLayout.x));
   });
-  svg.querySelectorAll('[id^="overview-sketch-"]').forEach((sketch) => {
-    const placeId = sketch.id.replace("overview-sketch-", "");
-    if (!layout?.places.includes(placeId)) { sketch.remove(); return; }
-    const place = placeLayersFor(source).find((item) => item.id === placeId);
-    const labelLayout = layout.labels?.[placeId] || { x: place?.tx, y: place?.ty, anchor: place?.anchor };
-    if (!Number.isFinite(Number(labelLayout.x)) || !Number.isFinite(Number(labelLayout.y))) { sketch.remove(); return; }
-    const anchor = labelLayout.anchor || place?.anchor || "start";
-    const lines = place?.lines?.length || 1;
-    const x = anchor === "end" ? Number(labelLayout.x) - 68 : Number(labelLayout.x);
-    const y = Number(labelLayout.y) + (lines - 1) * 31 + 10;
-    sketch.setAttribute("transform", `translate(${x.toFixed(1)} ${y.toFixed(1)})`);
-  });
   svg.querySelectorAll("[id]").forEach((element) => { element.id = `${id}-${element.id}`; });
   return new XMLSerializer().serializeToString(svg);
 }

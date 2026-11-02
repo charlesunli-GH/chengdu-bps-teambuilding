@@ -841,7 +841,6 @@
         },
         "query": "平武报恩寺",
         "localFeature": "明代古寺",
-        "featureSketch": "ming-temple",
         "overview": true
       },
       {
@@ -907,7 +906,6 @@
         },
         "query": "九寨沟五花海",
         "localFeature": "日则沟彩池",
-        "featureSketch": "pools",
         "overview": true
       },
       {
@@ -925,7 +923,6 @@
         },
         "query": "九寨沟珍珠滩瀑布",
         "localFeature": "滩上飞瀑",
-        "featureSketch": "pearl-falls",
         "overview": true
       },
       {
@@ -958,7 +955,6 @@
         },
         "query": "九寨沟诺日朗",
         "localFeature": "树正沟瀑布",
-        "featureSketch": "wide-falls",
         "overview": true
       },
       {
@@ -976,7 +972,6 @@
         },
         "query": "九寨沟长海",
         "localFeature": "则查洼长海",
-        "featureSketch": "long-lake",
         "overview": true
       },
       {
@@ -994,7 +989,6 @@
         },
         "query": "九寨沟五彩池",
         "localFeature": "则查洼彩池",
-        "featureSketch": "color-pools",
         "overview": true
       },
       {
@@ -1057,7 +1051,6 @@
         },
         "query": "平武白马藏寨",
         "localFeature": "白马人家",
-        "featureSketch": "baima-village",
         "overview": true
       }
     ],
@@ -1328,7 +1321,6 @@
               "明代古寺"
             ],
             "localFeature": "明代古寺",
-            "featureSketch": "ming-temple",
             "query": "平武报恩寺",
             "geo": {
               "lat": 32.4111746,
@@ -1417,7 +1409,6 @@
               "日则沟彩池"
             ],
             "localFeature": "日则沟彩池",
-            "featureSketch": "pools",
             "query": "九寨沟五花海",
             "geo": {
               "lat": 33.1605805,
@@ -1432,16 +1423,15 @@
             "x": 724,
             "y": 174.24,
             "color": "#618344",
-            "tx": 646,
-            "ty": 250.24,
+            "tx": 802,
+            "ty": 112.24,
             "size": 24,
-            "anchor": "end",
+            "anchor": "start",
             "lines": [
               "珍珠滩瀑布",
               "滩上飞瀑"
             ],
             "localFeature": "滩上飞瀑",
-            "featureSketch": "pearl-falls",
             "query": "九寨沟珍珠滩瀑布",
             "geo": {
               "lat": 33.1684873,
@@ -1456,8 +1446,8 @@
             "x": 736.99,
             "y": 316.94,
             "color": "#618344",
-            "tx": 598.99,
-            "ty": 418.94,
+            "tx": 658.99,
+            "ty": 392.94,
             "size": 24,
             "anchor": "end",
             "lines": [
@@ -1486,7 +1476,6 @@
               "树正沟瀑布"
             ],
             "localFeature": "树正沟瀑布",
-            "featureSketch": "wide-falls",
             "query": "九寨沟诺日朗",
             "geo": {
               "lat": 33.164939,
@@ -1510,7 +1499,6 @@
               "则查洼长海"
             ],
             "localFeature": "则查洼长海",
-            "featureSketch": "long-lake",
             "query": "九寨沟长海",
             "geo": {
               "lat": 33.0231485,
@@ -1525,16 +1513,15 @@
             "x": 803.86,
             "y": 169,
             "color": "#618344",
-            "tx": 941.86,
-            "ty": 81,
+            "tx": 725.86,
+            "ty": 107,
             "size": 24,
-            "anchor": "start",
+            "anchor": "end",
             "lines": [
               "五彩池",
               "则查洼彩池"
             ],
             "localFeature": "则查洼彩池",
-            "featureSketch": "color-pools",
             "query": "九寨沟五彩池",
             "geo": {
               "lat": 33.0487153,
@@ -1591,10 +1578,10 @@
             "x": 817.52,
             "y": 313.18,
             "color": "#209aaa",
-            "tx": 955.52,
-            "ty": 225.18,
+            "tx": 739.52,
+            "ty": 389.18,
             "size": 24,
-            "anchor": "start",
+            "anchor": "end",
             "lines": [
               "王朗保护区"
             ],
@@ -1621,7 +1608,6 @@
               "白马人家"
             ],
             "localFeature": "白马人家",
-            "featureSketch": "baima-village",
             "query": "平武白马藏寨",
             "geo": {
               "lat": 32.7314314,
@@ -1742,13 +1728,13 @@
                 "anchor": "end"
               },
               "pearl": {
-                "x": 646,
-                "y": 250.24,
-                "anchor": "end"
+                "x": 802,
+                "y": 112.24,
+                "anchor": "start"
               },
               "mirror": {
-                "x": 598.99,
-                "y": 418.94,
+                "x": 658.99,
+                "y": 392.94,
                 "anchor": "end"
               },
               "nuorilang": {
@@ -1762,9 +1748,9 @@
                 "anchor": "start"
               },
               "wucai": {
-                "x": 941.86,
-                "y": 81,
-                "anchor": "start"
+                "x": 725.86,
+                "y": 107,
+                "anchor": "end"
               },
               "rhino": {
                 "x": 686.59,
@@ -1844,9 +1830,9 @@
                 "anchor": "end"
               },
               "wanglang": {
-                "x": 955.52,
-                "y": 225.18,
-                "anchor": "start"
+                "x": 739.52,
+                "y": 389.18,
+                "anchor": "end"
               },
               "baima": {
                 "x": 791.93,
