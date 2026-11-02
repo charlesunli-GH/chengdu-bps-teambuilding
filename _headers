@@ -1,0 +1,4 @@
+/*
+  Cache-Control: private, no-store
+/assets/*
+  Cache-Control: private, max-age=86400

@@ -1,0 +1,1844 @@
+{
+  "$schema": "./schemas/trip-data.schema.json",
+  "schemaVersion": "2.0-lite",
+  "config": {
+    "schemaVersion": "1.0.0",
+    "modules": {
+      "flights": true,
+      "overview": true,
+      "itinerary": true,
+      "todo": true,
+      "driving": false,
+      "ledger": false
+    },
+    "language": "zh-CN",
+    "persistence": {
+      "mode": "local"
+    }
+  },
+  "metadata": {
+    "tripId": "chengdu-jiuzhai-outing-202611",
+    "title": "战略研讨会×Outing",
+    "language": "zh-CN",
+    "timeZone": "Asia/Shanghai",
+    "assets": {
+      "routeMaps": [
+        "assets/maps/templates/template-04-urban.webp"
+      ]
+    }
+  },
+  "trip": {
+    "status": "draft",
+    "startDate": "2026-11-05",
+    "endDate": "2026-11-08",
+    "dayCount": 4,
+    "nightCountAway": 3,
+    "countries": [
+      {
+        "code": "CN",
+        "name": "China",
+        "nameZh": "中国",
+        "nameEn": "China"
+      }
+    ],
+    "primaryDestinationCountries": [
+      "CN"
+    ],
+    "primaryDestinationName": "成都-九寨沟",
+    "citiesAndAreas": [
+      "成都",
+      "平武",
+      "九寨沟",
+      "王朗",
+      "白马"
+    ],
+    "routeSummary": "11月5日抵达成都双流，战略研讨后于11月6日经平武报恩寺到九寨沟，11月7日游沟，11月8日经王朗保护区和白马藏寨返回双流。",
+    "participants": [
+      "李宁",
+      "胡洋洋",
+      "李磊",
+      "蒋南",
+      "闾建晶",
+      "陆杰",
+      "李同华",
+      "童亨",
+      "赵文才",
+      "陈广阳",
+      "张劲雯",
+      "章喆",
+      "张文斌",
+      "LIF",
+      "杨肖萧"
+    ]
+  },
+  "flightJourneys": [
+    {
+      "id": "rec-out-ca8593",
+      "title": "推荐去程 · 上海浦东—成都双流T2 · 未出票",
+      "status": "recommended"
+    },
+    {
+      "id": "rec-out-3u8988",
+      "title": "推荐去程 · 南京禄口—成都双流T1 · 未出票",
+      "status": "recommended"
+    },
+    {
+      "id": "rec-out-zh9405",
+      "title": "推荐去程 · 深圳宝安—成都双流T2 · 未出票",
+      "status": "recommended"
+    },
+    {
+      "id": "rec-out-ca4398",
+      "title": "推荐去程 · 武汉天河—成都双流T2 · 未出票",
+      "status": "recommended"
+    },
+    {
+      "id": "rec-back-mu5868",
+      "title": "推荐返程 · 成都双流T2—上海虹桥 · 未出票",
+      "status": "recommended"
+    },
+    {
+      "id": "rec-back-3u8995",
+      "title": "推荐返程 · 成都双流T1—南京禄口 · 未出票",
+      "status": "recommended"
+    },
+    {
+      "id": "rec-back-3u8709",
+      "title": "推荐返程 · 成都双流T1—深圳宝安 · 未出票",
+      "status": "recommended"
+    },
+    {
+      "id": "rec-back-ca4043",
+      "title": "推荐返程 · 成都双流T2—武汉天河 · 未出票",
+      "status": "recommended"
+    }
+  ],
+  "flights": [
+    {
+      "id": "flight-ca8593",
+      "journeyId": "rec-out-ca8593",
+      "sequence": 1,
+      "airline": {
+        "name": "Air China",
+        "nameZh": "中国国际航空（推荐，未出票）"
+      },
+      "flightNumber": "CA8593",
+      "bookingStatus": "recommended",
+      "note": "推荐航班。未指定乘坐人，不是已出票。",
+      "departure": {
+        "airportCode": "PVG",
+        "city": "上海",
+        "airportName": "浦东",
+        "date": "2026-11-05",
+        "time": "09:00",
+        "utcOffset": "+08:00"
+      },
+      "arrival": {
+        "airportCode": "CTU",
+        "city": "成都",
+        "airportName": "双流T2",
+        "date": "2026-11-05",
+        "time": "12:25",
+        "utcOffset": "+08:00"
+      }
+    },
+    {
+      "id": "flight-3u8988",
+      "journeyId": "rec-out-3u8988",
+      "sequence": 1,
+      "airline": {
+        "name": "Sichuan Airlines",
+        "nameZh": "四川航空（推荐，未出票）"
+      },
+      "flightNumber": "3U8988",
+      "bookingStatus": "recommended",
+      "note": "推荐航班。未指定乘坐人，不是已出票。",
+      "departure": {
+        "airportCode": "NKG",
+        "city": "南京",
+        "airportName": "禄口",
+        "date": "2026-11-05",
+        "time": "10:40",
+        "utcOffset": "+08:00"
+      },
+      "arrival": {
+        "airportCode": "CTU",
+        "city": "成都",
+        "airportName": "双流T1",
+        "date": "2026-11-05",
+        "time": "13:25",
+        "utcOffset": "+08:00"
+      }
+    },
+    {
+      "id": "flight-zh9405",
+      "journeyId": "rec-out-zh9405",
+      "sequence": 1,
+      "airline": {
+        "name": "Shenzhen Airlines",
+        "nameZh": "深圳航空（推荐，未出票）"
+      },
+      "flightNumber": "ZH9405",
+      "bookingStatus": "recommended",
+      "note": "推荐航班。未指定乘坐人，不是已出票。",
+      "departure": {
+        "airportCode": "SZX",
+        "city": "深圳",
+        "airportName": "宝安",
+        "date": "2026-11-05",
+        "time": "09:50",
+        "utcOffset": "+08:00"
+      },
+      "arrival": {
+        "airportCode": "CTU",
+        "city": "成都",
+        "airportName": "双流T2",
+        "date": "2026-11-05",
+        "time": "12:25",
+        "utcOffset": "+08:00"
+      }
+    },
+    {
+      "id": "flight-ca4398",
+      "journeyId": "rec-out-ca4398",
+      "sequence": 1,
+      "airline": {
+        "name": "Air China",
+        "nameZh": "中国国际航空（推荐，未出票）"
+      },
+      "flightNumber": "CA4398",
+      "bookingStatus": "recommended",
+      "note": "推荐航班。未指定乘坐人，不是已出票。",
+      "departure": {
+        "airportCode": "WUH",
+        "city": "武汉",
+        "airportName": "天河",
+        "date": "2026-11-05",
+        "time": "11:10",
+        "utcOffset": "+08:00"
+      },
+      "arrival": {
+        "airportCode": "CTU",
+        "city": "成都",
+        "airportName": "双流T2",
+        "date": "2026-11-05",
+        "time": "13:10",
+        "utcOffset": "+08:00"
+      }
+    },
+    {
+      "id": "flight-mu5868",
+      "journeyId": "rec-back-mu5868",
+      "sequence": 1,
+      "airline": {
+        "name": "China Eastern",
+        "nameZh": "中国东方航空（推荐，未出票）"
+      },
+      "flightNumber": "MU5868",
+      "bookingStatus": "recommended",
+      "note": "推荐航班。未指定乘坐人，不是已出票。",
+      "departure": {
+        "airportCode": "CTU",
+        "city": "成都",
+        "airportName": "双流T2",
+        "date": "2026-11-08",
+        "time": "18:45",
+        "utcOffset": "+08:00"
+      },
+      "arrival": {
+        "airportCode": "SHA",
+        "city": "上海",
+        "airportName": "虹桥",
+        "date": "2026-11-08",
+        "time": "21:20",
+        "utcOffset": "+08:00"
+      }
+    },
+    {
+      "id": "flight-3u8995",
+      "journeyId": "rec-back-3u8995",
+      "sequence": 1,
+      "airline": {
+        "name": "Sichuan Airlines",
+        "nameZh": "四川航空（推荐，未出票）"
+      },
+      "flightNumber": "3U8995",
+      "bookingStatus": "recommended",
+      "note": "推荐航班。未指定乘坐人，不是已出票。",
+      "departure": {
+        "airportCode": "CTU",
+        "city": "成都",
+        "airportName": "双流T1",
+        "date": "2026-11-08",
+        "time": "18:40",
+        "utcOffset": "+08:00"
+      },
+      "arrival": {
+        "airportCode": "NKG",
+        "city": "南京",
+        "airportName": "禄口",
+        "date": "2026-11-08",
+        "time": "21:00",
+        "utcOffset": "+08:00"
+      }
+    },
+    {
+      "id": "flight-3u8709",
+      "journeyId": "rec-back-3u8709",
+      "sequence": 1,
+      "airline": {
+        "name": "Sichuan Airlines",
+        "nameZh": "四川航空（推荐，未出票）"
+      },
+      "flightNumber": "3U8709",
+      "bookingStatus": "recommended",
+      "note": "推荐航班。未指定乘坐人，不是已出票。",
+      "departure": {
+        "airportCode": "CTU",
+        "city": "成都",
+        "airportName": "双流T1",
+        "date": "2026-11-08",
+        "time": "19:20",
+        "utcOffset": "+08:00"
+      },
+      "arrival": {
+        "airportCode": "SZX",
+        "city": "深圳",
+        "airportName": "宝安",
+        "date": "2026-11-08",
+        "time": "21:40",
+        "utcOffset": "+08:00"
+      }
+    },
+    {
+      "id": "flight-ca4043",
+      "journeyId": "rec-back-ca4043",
+      "sequence": 1,
+      "airline": {
+        "name": "Air China",
+        "nameZh": "中国国际航空（推荐，未出票）"
+      },
+      "flightNumber": "CA4043",
+      "bookingStatus": "recommended",
+      "note": "推荐航班。未指定乘坐人，不是已出票。",
+      "departure": {
+        "airportCode": "CTU",
+        "city": "成都",
+        "airportName": "双流T2",
+        "date": "2026-11-08",
+        "time": "18:30",
+        "utcOffset": "+08:00"
+      },
+      "arrival": {
+        "airportCode": "WUH",
+        "city": "武汉",
+        "airportName": "天河",
+        "date": "2026-11-08",
+        "time": "20:25",
+        "utcOffset": "+08:00"
+      }
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "stay-donganhu",
+      "area": "成都",
+      "name": "成都东安湖木棉花·凯悦臻选酒店",
+      "checkIn": "2026-11-05",
+      "checkOut": "2026-11-06",
+      "nights": 1,
+      "note": "订单号待确认。退房时刻未单列。"
+    },
+    {
+      "id": "stay-jiuzhai",
+      "area": "九寨沟",
+      "name": "九寨天堂洲际酒店",
+      "checkIn": "2026-11-06",
+      "checkOut": "2026-11-08",
+      "nights": 2,
+      "note": "订单号待确认。资料写 11月6日 17:00 入住；11月8日早上返程，退房时刻未单列。"
+    }
+  ],
+  "days": [
+    {
+      "id": "day-1",
+      "day": 1,
+      "date": "2026-11-05",
+      "title": "周四 · 抵达成都 · 战略研讨会",
+      "locations": [
+        "成都双流机场",
+        "东安湖木棉花·凯悦臻选酒店"
+      ],
+      "notes": [
+        "参与人员 15 人：李宁、胡洋洋、李磊、蒋南、闾建晶、陆杰、李同华、童亨、赵文才、陈广阳、张劲雯、章喆、张文斌、LIF、杨肖萧。"
+      ],
+      "schedule": [
+        {
+          "id": "d1-arrive",
+          "time": "14:00",
+          "type": "drive",
+          "text": "抵达成都双流机场，机场取车自驾前往酒店。推荐航班（未指定乘坐人，不是已出票）：上海浦东—成都双流T2 CA8593 09:00–12:25；南京禄口—成都双流T1 3U8988 10:40–13:25；深圳宝安—成都双流T2 ZH9405 09:50–12:25；武汉天河—成都双流T2 CA4398 11:10–13:10。谁乘坐哪一班待确认。租车公司、车型、订单、费用、车牌和精确取还车时刻待确认。",
+          "placeIds": [
+            "ctu",
+            "donganhu"
+          ]
+        },
+        {
+          "id": "d1-seminar",
+          "time": "15:00–17:30",
+          "type": "note",
+          "text": "战略研讨会。地点栏为成都东安湖木棉花·凯悦臻选酒店，具体会议室待确认。",
+          "placeId": "donganhu"
+        },
+        {
+          "id": "d1-dinner",
+          "time": "17:30–19:30",
+          "type": "restaurant",
+          "text": "与芯鸥团队交流和晚餐。",
+          "placeId": "donganhu"
+        },
+        {
+          "id": "d1-hotel",
+          "time": "入住",
+          "type": "check-in",
+          "text": "住宿：成都东安湖木棉花·凯悦臻选酒店。订单号待确认。",
+          "placeId": "donganhu"
+        }
+      ]
+    },
+    {
+      "id": "day-2",
+      "day": 2,
+      "date": "2026-11-06",
+      "title": "周五 · 成都前往九寨沟",
+      "locations": [
+        "东安湖木棉花·凯悦臻选酒店",
+        "平武·报恩寺",
+        "九寨天堂洲际酒店"
+      ],
+      "schedule": [
+        {
+          "id": "d2-depart",
+          "time": "08:30–12:30",
+          "type": "drive",
+          "text": "出发去九寨沟，途经平武·报恩寺（明代古寺）。",
+          "placeIds": [
+            "donganhu",
+            "baoen"
+          ]
+        },
+        {
+          "id": "d2-lunch",
+          "time": "途中",
+          "type": "restaurant",
+          "text": "平武镇上午餐。具体餐厅待确认。",
+          "placeId": "baoen"
+        },
+        {
+          "id": "d2-arrive",
+          "time": "17:00",
+          "type": "check-in",
+          "text": "抵九寨沟并入住九寨天堂洲际酒店。订单号待确认。",
+          "placeId": "jiuzhai-hotel"
+        },
+        {
+          "id": "d2-dinner",
+          "time": "17:30–19:30",
+          "type": "restaurant",
+          "text": "圆桌晚餐。",
+          "placeId": "jiuzhai-hotel"
+        }
+      ]
+    },
+    {
+      "id": "day-3",
+      "day": 3,
+      "date": "2026-11-07",
+      "title": "周六 · 九寨沟",
+      "locations": [
+        "九寨沟景区"
+      ],
+      "schedule": [
+        {
+          "id": "d3-rize",
+          "time": "08:00–12:00",
+          "type": "attraction",
+          "text": "九寨沟右线日则沟：原始森林、箭竹海、五花海、珍珠滩瀑布、镜海。",
+          "placeIds": [
+            "primeval",
+            "arrow",
+            "wuhua",
+            "pearl",
+            "mirror"
+          ],
+          "ticketIds": [
+            "ticket-jiuzhai"
+          ]
+        },
+        {
+          "id": "d3-lunch",
+          "time": "12:00–13:00",
+          "type": "restaurant",
+          "text": "诺日朗中心简餐。",
+          "placeId": "nuorilang"
+        },
+        {
+          "id": "d3-left",
+          "time": "13:00–17:30",
+          "type": "attraction",
+          "text": "左线则查洼沟（长海、五彩池）和中线树正沟（诺日朗瀑布、犀牛海、树正群海）。",
+          "placeIds": [
+            "changhai",
+            "wucai",
+            "nuorilang",
+            "rhino",
+            "shuzheng"
+          ]
+        },
+        {
+          "id": "d3-dinner",
+          "time": "17:30–19:30",
+          "type": "restaurant",
+          "text": "景区外特色汤锅。店名待确认。"
+        }
+      ]
+    },
+    {
+      "id": "day-4",
+      "day": 4,
+      "date": "2026-11-08",
+      "title": "周日 · 返回双流",
+      "locations": [
+        "九寨天堂洲际酒店",
+        "王朗保护区",
+        "白马藏寨",
+        "成都双流机场"
+      ],
+      "schedule": [
+        {
+          "id": "d4-return",
+          "time": "08:00–15:00",
+          "type": "drive",
+          "text": "返回双流机场，途经王朗保护区、白马藏寨，随缘停留。自驾还车地点与时刻待确认。",
+          "placeIds": [
+            "jiuzhai-hotel",
+            "wanglang",
+            "baima",
+            "ctu"
+          ]
+        },
+        {
+          "id": "d4-lunch",
+          "time": "途中",
+          "type": "restaurant",
+          "text": "白马藏寨藏餐午餐。具体餐厅待确认。",
+          "placeId": "baima"
+        },
+        {
+          "id": "d4-fly",
+          "time": "18:30",
+          "type": "flight",
+          "text": "返程。推荐返程航班（未指定乘坐人，不是已出票）：成都双流T2—上海虹桥 MU5868 18:45–21:20；成都双流T1—南京禄口 3U8995 18:40–21:00；成都双流T1—深圳宝安 3U8709 19:20–21:40；成都双流T2—武汉天河 CA4043 18:30–20:25。谁乘坐哪一班待确认。",
+          "placeId": "ctu"
+        }
+      ]
+    }
+  ],
+  "places": [
+    {
+      "id": "ctu",
+      "name": "成都双流机场",
+      "nameZh": "成都双流机场",
+      "cityOrArea": "成都",
+      "navigation": {
+        "query": "成都双流国际机场"
+      }
+    },
+    {
+      "id": "donganhu",
+      "name": "东安湖木棉花·凯悦臻选酒店",
+      "nameZh": "东安湖木棉花·凯悦臻选酒店",
+      "cityOrArea": "成都",
+      "navigation": {
+        "query": "成都东安湖木棉花·凯悦臻选酒店"
+      }
+    },
+    {
+      "id": "baoen",
+      "name": "平武·报恩寺",
+      "nameZh": "平武·报恩寺",
+      "cityOrArea": "平武",
+      "navigation": {
+        "query": "平武报恩寺"
+      }
+    },
+    {
+      "id": "jiuzhai-hotel",
+      "name": "九寨天堂洲际酒店",
+      "nameZh": "九寨天堂洲际酒店",
+      "cityOrArea": "九寨沟",
+      "navigation": {
+        "query": "九寨天堂洲际酒店"
+      }
+    },
+    {
+      "id": "primeval",
+      "name": "原始森林",
+      "nameZh": "原始森林",
+      "cityOrArea": "九寨沟",
+      "navigation": {
+        "query": "九寨沟原始森林"
+      }
+    },
+    {
+      "id": "arrow",
+      "name": "箭竹海",
+      "nameZh": "箭竹海",
+      "cityOrArea": "九寨沟",
+      "navigation": {
+        "query": "九寨沟箭竹海"
+      }
+    },
+    {
+      "id": "wuhua",
+      "name": "五花海",
+      "nameZh": "五花海",
+      "cityOrArea": "九寨沟",
+      "navigation": {
+        "query": "九寨沟五花海"
+      }
+    },
+    {
+      "id": "pearl",
+      "name": "珍珠滩瀑布",
+      "nameZh": "珍珠滩瀑布",
+      "cityOrArea": "九寨沟",
+      "navigation": {
+        "query": "九寨沟珍珠滩瀑布"
+      }
+    },
+    {
+      "id": "mirror",
+      "name": "镜海",
+      "nameZh": "镜海",
+      "cityOrArea": "九寨沟",
+      "navigation": {
+        "query": "九寨沟镜海"
+      }
+    },
+    {
+      "id": "nuorilang",
+      "name": "诺日朗",
+      "nameZh": "诺日朗",
+      "cityOrArea": "九寨沟",
+      "navigation": {
+        "query": "九寨沟诺日朗"
+      }
+    },
+    {
+      "id": "changhai",
+      "name": "长海",
+      "nameZh": "长海",
+      "cityOrArea": "九寨沟",
+      "navigation": {
+        "query": "九寨沟长海"
+      }
+    },
+    {
+      "id": "wucai",
+      "name": "五彩池",
+      "nameZh": "五彩池",
+      "cityOrArea": "九寨沟",
+      "navigation": {
+        "query": "九寨沟五彩池"
+      }
+    },
+    {
+      "id": "rhino",
+      "name": "犀牛海",
+      "nameZh": "犀牛海",
+      "cityOrArea": "九寨沟",
+      "navigation": {
+        "query": "九寨沟犀牛海"
+      }
+    },
+    {
+      "id": "shuzheng",
+      "name": "树正群海",
+      "nameZh": "树正群海",
+      "cityOrArea": "九寨沟",
+      "navigation": {
+        "query": "九寨沟树正群海"
+      }
+    },
+    {
+      "id": "wanglang",
+      "name": "王朗保护区",
+      "nameZh": "王朗保护区",
+      "cityOrArea": "平武",
+      "navigation": {
+        "query": "王朗国家级自然保护区"
+      }
+    },
+    {
+      "id": "baima",
+      "name": "白马藏寨",
+      "nameZh": "白马藏寨",
+      "cityOrArea": "平武",
+      "navigation": {
+        "query": "平武白马藏寨"
+      }
+    }
+  ],
+  "restaurants": [],
+  "bookingsAndTickets": [],
+  "ticketPlanning": {
+    "statusStorage": "local",
+    "statusStorageNote": "门票状态默认只保存在当前浏览器。",
+    "items": [
+      {
+        "id": "ticket-jiuzhai",
+        "day": 3,
+        "dayId": "day-3",
+        "name": "九寨沟门票",
+        "requirement": "needs-confirmation",
+        "guidance": [
+          "资料未写九寨沟门票，购票方式待确认"
+        ],
+        "scheduleItemIds": [
+          "d3-rize"
+        ]
+      }
+    ]
+  },
+  "preTrip": {
+    "packingItems": [
+      {
+        "id": "todo-altitude",
+        "text": "高反预防（必备品 HR 准备）：提前 1-2 天口服红景天，氧气瓶、晕车药；到后放缓动作，不剧烈运动，第 1、2 天尽量不洗头洗澡。",
+        "completed": false
+      },
+      {
+        "id": "todo-weather",
+        "text": "气温大约在 -2℃ 到 20℃ 之间，昼夜温差大，高海拔可能骤降 5℃ 到 6℃，穿衣较关键。",
+        "completed": false
+      },
+      {
+        "id": "todo-layers",
+        "text": "穿衣建议：内层速干衣（尽量不要纯棉，徒步排汗不便）+ 中层抓绒服或轻薄羽绒内胆（注意保暖）+ 外层冲锋衣（必备，山顶风避免感冒）。",
+        "completed": false
+      },
+      {
+        "id": "todo-accessories",
+        "text": "配件：帽子（必备）、徒步鞋（雪路避免打滑）、手套（按需）。",
+        "completed": false
+      },
+      {
+        "id": "todo-docs",
+        "text": "证件：身份证、驾驶证。",
+        "completed": false
+      },
+      {
+        "id": "todo-items",
+        "text": "物品：保温杯、墨镜、充电宝、常用药品、防晒霜。",
+        "completed": false
+      }
+    ]
+  },
+  "issuesAndUncertainties": [
+    {
+      "id": "gap-flights",
+      "text": "去程和返程都是推荐航班，未指定谁坐哪一班，不是已出票。"
+    },
+    {
+      "id": "gap-rental",
+      "text": "租车公司、车型、订单、费用、车牌和精确取还车时刻待确认。资料只写机场取车自驾。"
+    },
+    {
+      "id": "gap-hotels",
+      "text": "成都东安湖木棉花·凯悦臻选酒店、九寨天堂洲际酒店的订单号待确认。退房时刻未单列。"
+    },
+    {
+      "id": "gap-seminar",
+      "text": "战略研讨会具体会议室待确认。地点栏为成都东安湖木棉花·凯悦臻选酒店。"
+    },
+    {
+      "id": "gap-meals",
+      "text": "平武镇上午餐的餐厅、景区外特色汤锅的店名、白马藏寨藏餐的餐厅待确认。"
+    },
+    {
+      "id": "gap-ticket",
+      "text": "九寨沟门票未写在资料里，待确认。"
+    }
+  ],
+  "map": {
+    "schemaVersion": "1.0-lite",
+    "mapMode": "template-auto",
+    "templateId": "auto",
+    "disclaimer": "本图仅表达地点的相对方位与路线顺序，不代表真实比例或精确地理边界。",
+    "region": {
+      "id": "chengdu-jiuzhai",
+      "label": "成都-九寨沟",
+      "countryCode": "CN",
+      "countryCodes": [
+        "CN"
+      ],
+      "heading": "成都 · 九寨沟",
+      "title": "战略研讨会×Outing · 成都-九寨沟",
+      "description": "成都到九寨沟四天行程示意图"
+    },
+    "places": [
+      {
+        "id": "ctu",
+        "name": "成都双流机场",
+        "nameZh": "成都双流机场",
+        "cityOrArea": "成都",
+        "countryCode": "CN",
+        "days": [
+          1,
+          4
+        ],
+        "geo": {
+          "lat": 30.5547779,
+          "lng": 103.9479075
+        },
+        "query": "成都双流国际机场",
+        "overview": true
+      },
+      {
+        "id": "donganhu",
+        "name": "东安湖木棉花·凯悦臻选酒店",
+        "nameZh": "东安湖木棉花·凯悦臻选酒店",
+        "cityOrArea": "成都",
+        "countryCode": "CN",
+        "days": [
+          1,
+          2
+        ],
+        "geo": {
+          "lat": 30.6002451,
+          "lng": 104.2397782
+        },
+        "query": "成都东安湖木棉花·凯悦臻选酒店",
+        "overview": true
+      },
+      {
+        "id": "baoen",
+        "name": "平武·报恩寺",
+        "nameZh": "平武·报恩寺",
+        "cityOrArea": "平武",
+        "countryCode": "CN",
+        "days": [
+          2
+        ],
+        "geo": {
+          "lat": 32.4111746,
+          "lng": 104.5290374
+        },
+        "query": "平武报恩寺",
+        "overview": true
+      },
+      {
+        "id": "jiuzhai-hotel",
+        "name": "九寨天堂洲际酒店",
+        "nameZh": "九寨天堂洲际酒店",
+        "cityOrArea": "九寨沟",
+        "countryCode": "CN",
+        "days": [
+          2,
+          3,
+          4
+        ],
+        "geo": {
+          "lat": 33.2651866,
+          "lng": 103.7695884
+        },
+        "query": "九寨天堂洲际酒店",
+        "overview": true
+      },
+      {
+        "id": "primeval",
+        "name": "原始森林",
+        "nameZh": "原始森林",
+        "cityOrArea": "九寨沟",
+        "countryCode": "CN",
+        "days": [
+          3
+        ],
+        "geo": {
+          "lat": 33.0676393,
+          "lng": 103.8598763
+        },
+        "query": "九寨沟原始森林",
+        "overview": true
+      },
+      {
+        "id": "arrow",
+        "name": "箭竹海",
+        "nameZh": "箭竹海",
+        "cityOrArea": "九寨沟",
+        "countryCode": "CN",
+        "days": [
+          3
+        ],
+        "geo": {
+          "lat": 33.1373698,
+          "lng": 103.871665
+        },
+        "query": "九寨沟箭竹海"
+      },
+      {
+        "id": "wuhua",
+        "name": "五花海",
+        "nameZh": "五花海",
+        "cityOrArea": "九寨沟",
+        "countryCode": "CN",
+        "days": [
+          3
+        ],
+        "geo": {
+          "lat": 33.1605805,
+          "lng": 103.8789338
+        },
+        "query": "九寨沟五花海"
+      },
+      {
+        "id": "pearl",
+        "name": "珍珠滩瀑布",
+        "nameZh": "珍珠滩瀑布",
+        "cityOrArea": "九寨沟",
+        "countryCode": "CN",
+        "days": [
+          3
+        ],
+        "geo": {
+          "lat": 33.1684873,
+          "lng": 103.8849784
+        },
+        "query": "九寨沟珍珠滩瀑布"
+      },
+      {
+        "id": "mirror",
+        "name": "镜海",
+        "nameZh": "镜海",
+        "cityOrArea": "九寨沟",
+        "countryCode": "CN",
+        "days": [
+          3
+        ],
+        "geo": {
+          "lat": 33.1631735,
+          "lng": 103.8921354
+        },
+        "query": "九寨沟镜海"
+      },
+      {
+        "id": "nuorilang",
+        "name": "诺日朗",
+        "nameZh": "诺日朗",
+        "cityOrArea": "九寨沟",
+        "countryCode": "CN",
+        "days": [
+          3
+        ],
+        "geo": {
+          "lat": 33.164939,
+          "lng": 103.9048159
+        },
+        "query": "九寨沟诺日朗",
+        "overview": true
+      },
+      {
+        "id": "changhai",
+        "name": "长海",
+        "nameZh": "长海",
+        "cityOrArea": "九寨沟",
+        "countryCode": "CN",
+        "days": [
+          3
+        ],
+        "geo": {
+          "lat": 33.0231485,
+          "lng": 103.9273797
+        },
+        "query": "九寨沟长海",
+        "overview": true
+      },
+      {
+        "id": "wucai",
+        "name": "五彩池",
+        "nameZh": "五彩池",
+        "cityOrArea": "九寨沟",
+        "countryCode": "CN",
+        "days": [
+          3
+        ],
+        "geo": {
+          "lat": 33.0487153,
+          "lng": 103.930395
+        },
+        "query": "九寨沟五彩池"
+      },
+      {
+        "id": "rhino",
+        "name": "犀牛海",
+        "nameZh": "犀牛海",
+        "cityOrArea": "九寨沟",
+        "countryCode": "CN",
+        "days": [
+          3
+        ],
+        "geo": {
+          "lat": 33.1856351,
+          "lng": 103.8926856
+        },
+        "query": "九寨沟犀牛海"
+      },
+      {
+        "id": "shuzheng",
+        "name": "树正群海",
+        "nameZh": "树正群海",
+        "cityOrArea": "九寨沟",
+        "countryCode": "CN",
+        "days": [
+          3
+        ],
+        "geo": {
+          "lat": 33.2063579,
+          "lng": 103.9001345
+        },
+        "query": "九寨沟树正群海"
+      },
+      {
+        "id": "wanglang",
+        "name": "王朗保护区",
+        "nameZh": "王朗保护区",
+        "cityOrArea": "平武",
+        "countryCode": "CN",
+        "days": [
+          4
+        ],
+        "geo": {
+          "lat": 32.9308511,
+          "lng": 104.0720436
+        },
+        "query": "王朗国家级自然保护区",
+        "overview": true
+      },
+      {
+        "id": "baima",
+        "name": "白马藏寨",
+        "nameZh": "白马藏寨",
+        "cityOrArea": "平武",
+        "countryCode": "CN",
+        "days": [
+          4
+        ],
+        "geo": {
+          "lat": 32.7314314,
+          "lng": 104.3526565
+        },
+        "query": "平武白马藏寨",
+        "overview": true
+      }
+    ],
+    "routes": [
+      {
+        "day": 1,
+        "placeIds": [
+          "ctu",
+          "donganhu"
+        ]
+      },
+      {
+        "day": 2,
+        "placeIds": [
+          "donganhu",
+          "baoen",
+          "jiuzhai-hotel"
+        ]
+      },
+      {
+        "day": 3,
+        "placeIds": [
+          "jiuzhai-hotel",
+          "primeval",
+          "arrow",
+          "wuhua",
+          "pearl",
+          "mirror",
+          "nuorilang",
+          "changhai",
+          "wucai",
+          "rhino",
+          "shuzheng"
+        ]
+      },
+      {
+        "day": 4,
+        "placeIds": [
+          "jiuzhai-hotel",
+          "wanglang",
+          "baima",
+          "ctu"
+        ]
+      }
+    ],
+    "dailyRoutes": [
+      {
+        "day": 1,
+        "placeIds": [
+          "ctu",
+          "donganhu"
+        ]
+      },
+      {
+        "day": 2,
+        "placeIds": [
+          "donganhu",
+          "baoen",
+          "jiuzhai-hotel"
+        ]
+      },
+      {
+        "day": 3,
+        "placeIds": [
+          "jiuzhai-hotel",
+          "primeval",
+          "arrow",
+          "wuhua",
+          "pearl",
+          "mirror",
+          "nuorilang",
+          "changhai",
+          "wucai",
+          "rhino",
+          "shuzheng"
+        ]
+      },
+      {
+        "day": 4,
+        "placeIds": [
+          "jiuzhai-hotel",
+          "wanglang",
+          "baima",
+          "ctu"
+        ]
+      }
+    ]
+  },
+  "routeMap": {
+    "defaultRegionId": "chengdu-jiuzhai",
+    "regions": [
+      {
+        "id": "chengdu-jiuzhai",
+        "label": "成都-九寨沟",
+        "countryCode": "CN",
+        "scope": "template-schematic",
+        "mapMode": "frozen-template",
+        "templateId": "urban-radial",
+        "mapModeReason": "dense-place-cluster",
+        "mapModeMetrics": {
+          "placeCount": 16,
+          "geoPlaceCount": 16,
+          "widthKm": 70.91,
+          "heightKm": 300.86,
+          "spanKm": 301.85,
+          "averageNearestKm": 11.56,
+          "components": 1,
+          "largestLegKm": 245.05,
+          "jumpRatio": 15.41
+        },
+        "days": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "canvas": {
+          "width": 1448,
+          "height": 1086
+        },
+        "projection": {
+          "type": "relative-schematic",
+          "bounds": null
+        },
+        "baseImage": "assets/maps/templates/template-04-urban.webp",
+        "title": "战略研讨会×Outing · 成都-九寨沟",
+        "ariaLabel": "成都-九寨沟模板化旅行路线示意图，共4天",
+        "description": "成都到九寨沟四天行程示意图",
+        "disclaimer": "本图仅表达地点的相对方位与路线顺序，不代表真实比例或精确地理边界。",
+        "heading": {
+          "text": "成都 · 九寨沟",
+          "x": 33,
+          "y": 105,
+          "size": 40
+        },
+        "legend": {
+          "x": 35,
+          "y": 168,
+          "gap": 43
+        },
+        "annotations": [],
+        "routes": [
+          {
+            "day": 1,
+            "color": "#397dc1",
+            "placeIds": [
+              "ctu",
+              "donganhu"
+            ],
+            "paths": [
+              "M791.1 851.34 C818.6 837.4 847.8 832.0 876.78 835.48"
+            ],
+            "overviewPaths": [
+              "M791.1 851.34 C818.6 837.4 847.8 832.0 876.78 835.48"
+            ]
+          },
+          {
+            "day": 2,
+            "color": "#e77e22",
+            "placeIds": [
+              "donganhu",
+              "baoen",
+              "jiuzhai-hotel"
+            ],
+            "paths": [
+              "M876.78 835.48 C928.4 702.7 950.5 565.1 941.6 430.92 C821.7 365.5 721.6 277.6 647.14 172.34"
+            ],
+            "overviewPaths": [
+              "M876.78 835.48 C928.4 702.7 950.5 565.1 941.6 430.92 C821.7 365.5 721.6 277.6 647.14 172.34"
+            ]
+          },
+          {
+            "day": 3,
+            "color": "#618344",
+            "placeIds": [
+              "jiuzhai-hotel",
+              "primeval",
+              "arrow",
+              "wuhua",
+              "pearl",
+              "mirror",
+              "nuorilang",
+              "changhai",
+              "wucai",
+              "rhino",
+              "shuzheng"
+            ],
+            "paths": [
+              "M647.14 172.34 C714.3 230.6 760.4 302.3 782.66 383.43 C848.6 346.1 899.3 293.9 931.59 229.91 C849.6 260.1 765.9 265.8 685.55 246.47 C705.8 225.8 718.9 201.2 724 174.24 C742.7 221.5 747.1 270.0 736.99 316.94 C803.2 281.8 854.7 231.5 888.27 169 C905.9 213.4 910.1 259.1 900.67 303.31 C881.2 248.0 848.3 202.3 803.86 169 C797.8 197.6 784.4 222.3 764.59 241.59 C795.1 247.8 824.9 245.2 852.21 234.03"
+            ],
+            "overviewPaths": [
+              "M647.14 172.34 C714.3 230.6 760.4 302.3 782.66 383.43 C840.0 321.1 875.9 248.2 888.27 169 C905.9 213.4 910.1 259.1 900.67 303.31 C891.1 274.9 874.6 251.4 852.21 234.03"
+            ]
+          },
+          {
+            "day": 4,
+            "color": "#209aaa",
+            "placeIds": [
+              "jiuzhai-hotel",
+              "wanglang",
+              "baima",
+              "ctu"
+            ],
+            "paths": [
+              "M647.14 172.34 C691.0 237.3 748.9 285.1 817.52 313.18 C842.4 331.9 860.2 355.8 869.93 383.56 C813.5 537.6 786.7 696.7 791.1 851.34"
+            ],
+            "overviewPaths": [
+              "M647.14 172.34 C691.0 237.3 748.9 285.1 817.52 313.18 C842.4 331.9 860.2 355.8 869.93 383.56 C813.5 537.6 786.7 696.7 791.1 851.34"
+            ]
+          }
+        ],
+        "places": [
+          {
+            "id": "ctu",
+            "x": 791.1,
+            "y": 851.34,
+            "color": "#397dc1",
+            "tx": 823.1,
+            "ty": 901.34,
+            "size": 24,
+            "anchor": "start",
+            "lines": [
+              "成都双流机场"
+            ],
+            "query": "成都双流国际机场",
+            "geo": {
+              "lat": 30.5547779,
+              "lng": 103.9479075
+            },
+            "days": [
+              1,
+              4
+            ]
+          },
+          {
+            "id": "donganhu",
+            "x": 876.78,
+            "y": 835.48,
+            "color": "#397dc1",
+            "tx": 954.78,
+            "ty": 773.48,
+            "size": 24,
+            "anchor": "start",
+            "lines": [
+              "东安湖木棉花·凯悦臻选酒店"
+            ],
+            "query": "成都东安湖木棉花·凯悦臻选酒店",
+            "geo": {
+              "lat": 30.6002451,
+              "lng": 104.2397782
+            },
+            "days": [
+              1,
+              2
+            ]
+          },
+          {
+            "id": "baoen",
+            "x": 941.6,
+            "y": 430.92,
+            "color": "#e77e22",
+            "tx": 1019.6,
+            "ty": 368.92,
+            "size": 24,
+            "anchor": "start",
+            "lines": [
+              "平武·报恩寺"
+            ],
+            "query": "平武报恩寺",
+            "geo": {
+              "lat": 32.4111746,
+              "lng": 104.5290374
+            },
+            "days": [
+              2
+            ]
+          },
+          {
+            "id": "jiuzhai-hotel",
+            "x": 647.14,
+            "y": 172.34,
+            "color": "#e77e22",
+            "tx": 569.14,
+            "ty": 110.34,
+            "size": 24,
+            "anchor": "end",
+            "lines": [
+              "九寨天堂洲际酒店"
+            ],
+            "query": "九寨天堂洲际酒店",
+            "geo": {
+              "lat": 33.2651866,
+              "lng": 103.7695884
+            },
+            "days": [
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "id": "primeval",
+            "x": 782.66,
+            "y": 383.43,
+            "color": "#618344",
+            "tx": 920.66,
+            "ty": 295.43,
+            "size": 24,
+            "anchor": "start",
+            "lines": [
+              "原始森林"
+            ],
+            "query": "九寨沟原始森林",
+            "geo": {
+              "lat": 33.0676393,
+              "lng": 103.8598763
+            },
+            "days": [
+              3
+            ]
+          },
+          {
+            "id": "arrow",
+            "x": 931.59,
+            "y": 229.91,
+            "color": "#618344",
+            "tx": 963.59,
+            "ty": 197.91,
+            "size": 24,
+            "anchor": "start",
+            "lines": [
+              "箭竹海"
+            ],
+            "query": "九寨沟箭竹海",
+            "geo": {
+              "lat": 33.1373698,
+              "lng": 103.871665
+            },
+            "days": [
+              3
+            ]
+          },
+          {
+            "id": "wuhua",
+            "x": 685.55,
+            "y": 246.47,
+            "color": "#618344",
+            "tx": 653.55,
+            "ty": 296.47,
+            "size": 24,
+            "anchor": "end",
+            "lines": [
+              "五花海"
+            ],
+            "query": "九寨沟五花海",
+            "geo": {
+              "lat": 33.1605805,
+              "lng": 103.8789338
+            },
+            "days": [
+              3
+            ]
+          },
+          {
+            "id": "pearl",
+            "x": 724,
+            "y": 174.24,
+            "color": "#618344",
+            "tx": 802,
+            "ty": 112.24,
+            "size": 24,
+            "anchor": "start",
+            "lines": [
+              "珍珠滩瀑布"
+            ],
+            "query": "九寨沟珍珠滩瀑布",
+            "geo": {
+              "lat": 33.1684873,
+              "lng": 103.8849784
+            },
+            "days": [
+              3
+            ]
+          },
+          {
+            "id": "mirror",
+            "x": 736.99,
+            "y": 316.94,
+            "color": "#618344",
+            "tx": 658.99,
+            "ty": 392.94,
+            "size": 24,
+            "anchor": "end",
+            "lines": [
+              "镜海"
+            ],
+            "query": "九寨沟镜海",
+            "geo": {
+              "lat": 33.1631735,
+              "lng": 103.8921354
+            },
+            "days": [
+              3
+            ]
+          },
+          {
+            "id": "nuorilang",
+            "x": 888.27,
+            "y": 169,
+            "color": "#618344",
+            "tx": 1026.27,
+            "ty": 81,
+            "size": 24,
+            "anchor": "start",
+            "lines": [
+              "诺日朗"
+            ],
+            "query": "九寨沟诺日朗",
+            "geo": {
+              "lat": 33.164939,
+              "lng": 103.9048159
+            },
+            "days": [
+              3
+            ]
+          },
+          {
+            "id": "changhai",
+            "x": 900.67,
+            "y": 303.31,
+            "color": "#618344",
+            "tx": 978.67,
+            "ty": 379.31,
+            "size": 24,
+            "anchor": "start",
+            "lines": [
+              "长海"
+            ],
+            "query": "九寨沟长海",
+            "geo": {
+              "lat": 33.0231485,
+              "lng": 103.9273797
+            },
+            "days": [
+              3
+            ]
+          },
+          {
+            "id": "wucai",
+            "x": 803.86,
+            "y": 169,
+            "color": "#618344",
+            "tx": 725.86,
+            "ty": 107,
+            "size": 24,
+            "anchor": "end",
+            "lines": [
+              "五彩池"
+            ],
+            "query": "九寨沟五彩池",
+            "geo": {
+              "lat": 33.0487153,
+              "lng": 103.930395
+            },
+            "days": [
+              3
+            ]
+          },
+          {
+            "id": "rhino",
+            "x": 764.59,
+            "y": 241.59,
+            "color": "#618344",
+            "tx": 686.59,
+            "ty": 179.59,
+            "size": 24,
+            "anchor": "end",
+            "lines": [
+              "犀牛海"
+            ],
+            "query": "九寨沟犀牛海",
+            "geo": {
+              "lat": 33.1856351,
+              "lng": 103.8926856
+            },
+            "days": [
+              3
+            ]
+          },
+          {
+            "id": "shuzheng",
+            "x": 852.21,
+            "y": 234.03,
+            "color": "#618344",
+            "tx": 930.21,
+            "ty": 172.03,
+            "size": 24,
+            "anchor": "start",
+            "lines": [
+              "树正群海"
+            ],
+            "query": "九寨沟树正群海",
+            "geo": {
+              "lat": 33.2063579,
+              "lng": 103.9001345
+            },
+            "days": [
+              3
+            ]
+          },
+          {
+            "id": "wanglang",
+            "x": 817.52,
+            "y": 313.18,
+            "color": "#209aaa",
+            "tx": 739.52,
+            "ty": 389.18,
+            "size": 24,
+            "anchor": "end",
+            "lines": [
+              "王朗保护区"
+            ],
+            "query": "王朗国家级自然保护区",
+            "geo": {
+              "lat": 32.9308511,
+              "lng": 104.0720436
+            },
+            "days": [
+              4
+            ]
+          },
+          {
+            "id": "baima",
+            "x": 869.93,
+            "y": 383.56,
+            "color": "#209aaa",
+            "tx": 791.93,
+            "ty": 459.56,
+            "size": 24,
+            "anchor": "end",
+            "lines": [
+              "白马藏寨"
+            ],
+            "query": "平武白马藏寨",
+            "geo": {
+              "lat": 32.7314314,
+              "lng": 104.3526565
+            },
+            "days": [
+              4
+            ]
+          }
+        ],
+        "overviewPlaceIds": [
+          "ctu",
+          "donganhu",
+          "baoen",
+          "jiuzhai-hotel",
+          "primeval",
+          "nuorilang",
+          "changhai",
+          "shuzheng",
+          "wanglang",
+          "baima"
+        ],
+        "dailyLayouts": {
+          "1": {
+            "places": [
+              "ctu",
+              "donganhu"
+            ],
+            "labels": {
+              "ctu": {
+                "x": 823.1,
+                "y": 901.34,
+                "anchor": "start"
+              },
+              "donganhu": {
+                "x": 954.78,
+                "y": 773.48,
+                "anchor": "start"
+              }
+            },
+            "transport": [
+              {
+                "items": [],
+                "x": 833.94,
+                "y": 843.41
+              }
+            ]
+          },
+          "2": {
+            "places": [
+              "donganhu",
+              "baoen",
+              "jiuzhai-hotel"
+            ],
+            "labels": {
+              "donganhu": {
+                "x": 954.78,
+                "y": 773.48,
+                "anchor": "start"
+              },
+              "baoen": {
+                "x": 1019.6,
+                "y": 368.92,
+                "anchor": "start"
+              },
+              "jiuzhai-hotel": {
+                "x": 569.14,
+                "y": 110.34,
+                "anchor": "end"
+              }
+            },
+            "transport": [
+              {
+                "items": [],
+                "x": 909.19,
+                "y": 633.2
+              },
+              {
+                "items": [],
+                "x": 794.37,
+                "y": 301.63
+              }
+            ]
+          },
+          "3": {
+            "places": [
+              "jiuzhai-hotel",
+              "primeval",
+              "arrow",
+              "wuhua",
+              "pearl",
+              "mirror",
+              "nuorilang",
+              "changhai",
+              "wucai",
+              "rhino",
+              "shuzheng"
+            ],
+            "labels": {
+              "jiuzhai-hotel": {
+                "x": 569.14,
+                "y": 110.34,
+                "anchor": "end"
+              },
+              "primeval": {
+                "x": 920.66,
+                "y": 295.43,
+                "anchor": "start"
+              },
+              "arrow": {
+                "x": 963.59,
+                "y": 197.91,
+                "anchor": "start"
+              },
+              "wuhua": {
+                "x": 653.55,
+                "y": 296.47,
+                "anchor": "end"
+              },
+              "pearl": {
+                "x": 802,
+                "y": 112.24,
+                "anchor": "start"
+              },
+              "mirror": {
+                "x": 658.99,
+                "y": 392.94,
+                "anchor": "end"
+              },
+              "nuorilang": {
+                "x": 1026.27,
+                "y": 81,
+                "anchor": "start"
+              },
+              "changhai": {
+                "x": 978.67,
+                "y": 379.31,
+                "anchor": "start"
+              },
+              "wucai": {
+                "x": 725.86,
+                "y": 107,
+                "anchor": "end"
+              },
+              "rhino": {
+                "x": 686.59,
+                "y": 179.59,
+                "anchor": "end"
+              },
+              "shuzheng": {
+                "x": 930.21,
+                "y": 172.03,
+                "anchor": "start"
+              }
+            },
+            "transport": [
+              {
+                "items": [],
+                "x": 714.9,
+                "y": 277.88
+              },
+              {
+                "items": [],
+                "x": 857.13,
+                "y": 306.67
+              },
+              {
+                "items": [],
+                "x": 808.57,
+                "y": 238.19
+              },
+              {
+                "items": [],
+                "x": 704.77,
+                "y": 210.36
+              },
+              {
+                "items": [],
+                "x": 730.5,
+                "y": 245.59
+              },
+              {
+                "items": [],
+                "x": 812.63,
+                "y": 242.97
+              },
+              {
+                "items": [],
+                "x": 894.47,
+                "y": 236.16
+              },
+              {
+                "items": [],
+                "x": 852.26,
+                "y": 236.16
+              },
+              {
+                "items": [],
+                "x": 784.23,
+                "y": 205.3
+              },
+              {
+                "items": [],
+                "x": 808.4,
+                "y": 237.81
+              }
+            ]
+          },
+          "4": {
+            "places": [
+              "jiuzhai-hotel",
+              "wanglang",
+              "baima",
+              "ctu"
+            ],
+            "labels": {
+              "jiuzhai-hotel": {
+                "x": 569.14,
+                "y": 110.34,
+                "anchor": "end"
+              },
+              "wanglang": {
+                "x": 739.52,
+                "y": 389.18,
+                "anchor": "end"
+              },
+              "baima": {
+                "x": 791.93,
+                "y": 459.56,
+                "anchor": "end"
+              },
+              "ctu": {
+                "x": 823.1,
+                "y": 901.34,
+                "anchor": "start"
+              }
+            },
+            "transport": [
+              {
+                "items": [],
+                "x": 732.33,
+                "y": 242.76
+              },
+              {
+                "items": [],
+                "x": 843.72,
+                "y": 348.37
+              },
+              {
+                "items": [],
+                "x": 830.51,
+                "y": 617.45
+              }
+            ]
+          }
+        }
+      }
+    ]
+  }
+}
