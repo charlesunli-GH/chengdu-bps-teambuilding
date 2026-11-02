@@ -315,31 +315,34 @@ function labelMetrics(place) {
   const feature = localFeatureOf(place);
   const primary = String(place.name || place.nameZh || place.id || "");
   const secondary = place.nameZh && place.nameZh !== primary ? String(place.nameZh) : "";
-  const legacyWidth = Math.max(154, Math.min(330, Math.max(String(place.name || "").length, String(place.nameZh || "").length * 2) * 13));
-  if (!feature) return { feature: "", width: legacyWidth, height: 58, lines: secondary ? [`${primary} /`, secondary] : [primary] };
-  const measured = Math.max(labelTextWidth(primary, 24), secondary ? labelTextWidth(secondary, 24) : 0, labelTextWidth(feature, 24));
-  const width = Math.max(legacyWidth, Math.min(360, Math.ceil(measured)));
-  const extraLines = (secondary ? 1 : 0) + 1;
   const lines = secondary ? [`${primary} /`, secondary] : [primary];
-  if (feature !== primary && feature !== secondary) lines.push(feature);
-  return { feature, width, height: Math.max(58, 26 + extraLines * 31 + 6), lines };
+  if (feature && feature !== primary && feature !== secondary) lines.push(feature);
+  const measured = Math.max(...lines.map((line) => labelTextWidth(line, 24)), 48);
+  const width = Math.min(360, Math.ceil(measured + 6));
+  const extraLines = Math.max(0, lines.length - 1);
+  return { feature, width, height: 32 + extraLines * 31, lines };
 }
 
 function labelFor(place, index, occupied) {
-  const choices = [[32, -32], [32, 50], [-32, -32], [-32, 50], [78, -62], [78, 76], [-78, -62], [-78, 76], [138, -88], [-138, -88], [138, 102], [-138, 102]];
-  const automatic = choices.map((_, offset) => choices[(offset + index * 2) % choices.length]);
-  const candidates = place.labelOffset ? [[place.labelOffset.x, place.labelOffset.y], ...automatic] : automatic;
+  const choices = [
+    [26, 6], [-26, 6], [26, -18], [-26, -18],
+    [26, 34], [-26, 34], [26, -46], [-26, -46],
+    [42, 6], [-42, 6], [42, -18], [-42, -18],
+    [58, 10], [-58, 10], [58, -28], [-58, -28]
+  ];
+  const rotated = choices.map((_, offset) => choices[(offset + index) % choices.length]);
+  const candidates = place.labelOffset ? [[place.labelOffset.x, place.labelOffset.y], ...rotated] : rotated;
   const { width, height } = labelMetrics(place);
   let best;
   for (const [dx, dy] of candidates) {
     const anchor = place.anchor || (dx < 0 ? "end" : "start");
-    const x = place.x + dx, y = place.y + dy;
-    const box = { x: anchor === "end" ? x - width : x, y: y - 26, width, height };
-    const inCanvas = box.x >= 18 && box.x + box.width <= GOLDEN.width - 18 && box.y >= 18 && box.y + box.height <= GOLDEN.height - 18;
+    const x = place.x + dx;
+    const y = place.y + dy;
+    const box = { x: anchor === "end" ? x - width : x, y: y - 24, width, height };
+    const inCanvas = box.x >= 12 && box.x + box.width <= GOLDEN.width - 12 && box.y >= 12 && box.y + box.height <= GOLDEN.height - 12;
     const collisions = occupied.filter((item) => overlaps(item, box)).length;
-    const score = collisions * 10000 + Math.hypot(dx, dy) + (inCanvas ? 0 : 100000);
+    const score = (inCanvas ? 0 : 100000) + collisions * 10000 + Math.hypot(dx, dy);
     if (!best || score < best.score) best = { x, y, anchor, box, score };
-    if (inCanvas && collisions === 0) { occupied.push(box); return { x, y, anchor }; }
   }
   occupied.push(best.box);
   return { x: best.x, y: best.y, anchor: best.anchor };

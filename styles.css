@@ -195,8 +195,37 @@ main { overflow: hidden; }
     linear-gradient(180deg, rgba(255,255,255,.7), rgba(255,255,255,0) 92px),
     #f4efe4;
 }
+.boarding-pass[data-airline="ca"] {
+  --pass: #a31224;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.62), rgba(255,255,255,0) 92px),
+    #f8e4e2;
+}
+.boarding-pass[data-airline="mu"] {
+  --pass: #2a2a86;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.62), rgba(255,255,255,0) 92px),
+    #e4e6f8;
+}
+.boarding-pass[data-airline="ca"] .boarding-pass__stub { background: #f3d2ce; }
+.boarding-pass[data-airline="mu"] .boarding-pass__stub { background: #d5d8f2; }
 .boarding-pass[data-airline="fm"] { --pass: #9d1c2f; }
 .boarding-pass[data-airline="cz"] { --pass: #0d3f8c; }
+.flight-nav-group { display: flex; align-items: center; gap: 8px; }
+.flight-nav {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #1c2430;
+  border-radius: 50%;
+  background: #fff;
+  color: #1c2430;
+  box-shadow: 0 4px 12px rgba(28, 36, 48, .14);
+  font: 700 28px/1 ui-sans-serif, system-ui, sans-serif;
+  cursor: pointer;
+}
+.flight-nav:disabled { opacity: .4; cursor: default; }
 .boarding-pass__main { min-width: 0; padding: 16px 16px 12px; border-top: 8px solid var(--pass); }
 .boarding-pass__head { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
 .boarding-pass__brand { color: var(--pass); font-size: 13px; font-weight: 800; letter-spacing: .04em; }

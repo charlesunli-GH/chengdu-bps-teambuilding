@@ -299,10 +299,55 @@ function barcodeMarkup(seed) {
 }
 
 function airlineKey(flight) {
-  const name = `${flight.airline?.name || ""} ${flight.airline?.nameZh || ""} ${flight.flightNumber || ""}`.toLowerCase();
-  if (name.includes("southern") || name.includes("南方") || name.startsWith("cz")) return "cz";
-  if (name.includes("shanghai") || name.includes("上海航空") || name.startsWith("fm")) return "fm";
+  const name = `${flight.airline?.name || ""} ${flight.airline?.nameZh || ""}`.toLowerCase();
+  const number = String(flight.flightNumber || "").toUpperCase();
+  if (name.includes("eastern") || name.includes("东方") || number.startsWith("MU")) return "mu";
+  if (name.includes("air china") || name.includes("国际航空") || name.includes("国航") || number.startsWith("CA")) return "ca";
+  if (name.includes("southern") || name.includes("南方") || number.startsWith("CZ")) return "cz";
+  if (name.includes("shanghai") || name.includes("上海航空") || number.startsWith("FM")) return "fm";
   return "default";
+}
+
+function activeFlightIndex(carousel) {
+  const cards = $$(".flight-card", carousel);
+  const frame = carousel.getBoundingClientRect();
+  const center = frame.left + frame.width / 2;
+  let activeIndex = 0;
+  let distance = Infinity;
+  cards.forEach((card, index) => {
+    const box = card.getBoundingClientRect();
+    const cardCenter = box.left + box.width / 2;
+    if (Math.abs(cardCenter - center) < distance) {
+      distance = Math.abs(cardCenter - center);
+      activeIndex = index;
+    }
+  });
+  return { cards, activeIndex };
+}
+
+function updateFlightNav(carousel) {
+  const { cards, activeIndex } = activeFlightIndex(carousel);
+  const previous = $("#flight-prev");
+  const next = $("#flight-next");
+  if (previous) previous.disabled = activeIndex <= 0;
+  if (next) next.disabled = activeIndex >= cards.length - 1;
+  $$(".carousel-dot", $("#flight-dots")).forEach((dot, index) => dot.classList.toggle("is-active", index === activeIndex));
+  $("#flight-index").textContent = `${cards.length ? activeIndex + 1 : 0} / ${cards.length}`;
+}
+
+function scrollFlightBy(direction) {
+  const carousel = $("#flight-carousel");
+  if (!carousel) return;
+  const { cards, activeIndex } = activeFlightIndex(carousel);
+  const nextIndex = Math.min(cards.length - 1, Math.max(0, activeIndex + direction));
+  const card = cards[nextIndex];
+  if (!card) return;
+  const frame = carousel.getBoundingClientRect();
+  const box = card.getBoundingClientRect();
+  carousel.scrollTo({
+    left: carousel.scrollLeft + (box.left - frame.left) - (frame.width - box.width) / 2,
+    behavior: "smooth"
+  });
 }
 
 function flightCard(journey, index) {
@@ -383,27 +428,18 @@ function renderFlights() {
   const journeys = state.data.flightJourneys;
   $("#flight-carousel").innerHTML = journeys.map(flightCard).join("");
   $("#flight-dots").innerHTML = journeys.map((_, index) => `<span class="carousel-dot${index === 0 ? " is-active" : ""}"></span>`).join("");
-  $("#flight-index").textContent = `1 / ${journeys.length}`;
-
   const carousel = $("#flight-carousel");
+  const previous = $("#flight-prev");
+  const next = $("#flight-next");
+  if (previous) previous.onclick = () => scrollFlightBy(-1);
+  if (next) next.onclick = () => scrollFlightBy(1);
+  updateFlightNav(carousel);
   let scheduled = false;
   carousel.addEventListener("scroll", () => {
     if (scheduled) return;
     scheduled = true;
     requestAnimationFrame(() => {
-      const cards = $$(".flight-card", carousel);
-      const center = carousel.scrollLeft + carousel.clientWidth / 2;
-      let activeIndex = 0;
-      let distance = Infinity;
-      cards.forEach((card, index) => {
-        const cardCenter = card.offsetLeft + card.offsetWidth / 2;
-        if (Math.abs(cardCenter - center) < distance) {
-          distance = Math.abs(cardCenter - center);
-          activeIndex = index;
-        }
-      });
-      $$(".carousel-dot", $("#flight-dots")).forEach((dot, index) => dot.classList.toggle("is-active", index === activeIndex));
-      $("#flight-index").textContent = `${activeIndex + 1} / ${journeys.length}`;
+      updateFlightNav(carousel);
       scheduled = false;
     });
   }, { passive: true });
