@@ -78,43 +78,13 @@
   "flightJourneys": [
     {
       "id": "rec-out-ca8593",
-      "title": "推荐去程 · 上海浦东—成都双流T2 · 未出票",
-      "status": "recommended"
-    },
-    {
-      "id": "rec-out-3u8988",
-      "title": "推荐去程 · 南京禄口—成都双流T1 · 未出票",
-      "status": "recommended"
-    },
-    {
-      "id": "rec-out-zh9405",
-      "title": "推荐去程 · 深圳宝安—成都双流T2 · 未出票",
-      "status": "recommended"
-    },
-    {
-      "id": "rec-out-ca4398",
-      "title": "推荐去程 · 武汉天河—成都双流T2 · 未出票",
-      "status": "recommended"
+      "title": "去程 · 上海浦东—成都双流T2",
+      "status": "confirmed"
     },
     {
       "id": "rec-back-mu5868",
-      "title": "推荐返程 · 成都双流T2—上海虹桥 · 未出票",
-      "status": "recommended"
-    },
-    {
-      "id": "rec-back-3u8995",
-      "title": "推荐返程 · 成都双流T1—南京禄口 · 未出票",
-      "status": "recommended"
-    },
-    {
-      "id": "rec-back-3u8709",
-      "title": "推荐返程 · 成都双流T1—深圳宝安 · 未出票",
-      "status": "recommended"
-    },
-    {
-      "id": "rec-back-ca4043",
-      "title": "推荐返程 · 成都双流T2—武汉天河 · 未出票",
-      "status": "recommended"
+      "title": "返程 · 成都双流T2—上海虹桥",
+      "status": "confirmed"
     }
   ],
   "flights": [
@@ -124,11 +94,10 @@
       "sequence": 1,
       "airline": {
         "name": "Air China",
-        "nameZh": "中国国际航空（推荐，未出票）"
+        "nameZh": "中国国际航空"
       },
       "flightNumber": "CA8593",
-      "bookingStatus": "recommended",
-      "note": "推荐航班。未指定乘坐人，不是已出票。",
+      "bookingStatus": "confirmed",
       "departure": {
         "airportCode": "PVG",
         "city": "上海",
@@ -147,100 +116,15 @@
       }
     },
     {
-      "id": "flight-3u8988",
-      "journeyId": "rec-out-3u8988",
-      "sequence": 1,
-      "airline": {
-        "name": "Sichuan Airlines",
-        "nameZh": "四川航空（推荐，未出票）"
-      },
-      "flightNumber": "3U8988",
-      "bookingStatus": "recommended",
-      "note": "推荐航班。未指定乘坐人，不是已出票。",
-      "departure": {
-        "airportCode": "NKG",
-        "city": "南京",
-        "airportName": "禄口",
-        "date": "2026-11-05",
-        "time": "10:40",
-        "utcOffset": "+08:00"
-      },
-      "arrival": {
-        "airportCode": "CTU",
-        "city": "成都",
-        "airportName": "双流T1",
-        "date": "2026-11-05",
-        "time": "13:25",
-        "utcOffset": "+08:00"
-      }
-    },
-    {
-      "id": "flight-zh9405",
-      "journeyId": "rec-out-zh9405",
-      "sequence": 1,
-      "airline": {
-        "name": "Shenzhen Airlines",
-        "nameZh": "深圳航空（推荐，未出票）"
-      },
-      "flightNumber": "ZH9405",
-      "bookingStatus": "recommended",
-      "note": "推荐航班。未指定乘坐人，不是已出票。",
-      "departure": {
-        "airportCode": "SZX",
-        "city": "深圳",
-        "airportName": "宝安",
-        "date": "2026-11-05",
-        "time": "09:50",
-        "utcOffset": "+08:00"
-      },
-      "arrival": {
-        "airportCode": "CTU",
-        "city": "成都",
-        "airportName": "双流T2",
-        "date": "2026-11-05",
-        "time": "12:25",
-        "utcOffset": "+08:00"
-      }
-    },
-    {
-      "id": "flight-ca4398",
-      "journeyId": "rec-out-ca4398",
-      "sequence": 1,
-      "airline": {
-        "name": "Air China",
-        "nameZh": "中国国际航空（推荐，未出票）"
-      },
-      "flightNumber": "CA4398",
-      "bookingStatus": "recommended",
-      "note": "推荐航班。未指定乘坐人，不是已出票。",
-      "departure": {
-        "airportCode": "WUH",
-        "city": "武汉",
-        "airportName": "天河",
-        "date": "2026-11-05",
-        "time": "11:10",
-        "utcOffset": "+08:00"
-      },
-      "arrival": {
-        "airportCode": "CTU",
-        "city": "成都",
-        "airportName": "双流T2",
-        "date": "2026-11-05",
-        "time": "13:10",
-        "utcOffset": "+08:00"
-      }
-    },
-    {
       "id": "flight-mu5868",
       "journeyId": "rec-back-mu5868",
       "sequence": 1,
       "airline": {
         "name": "China Eastern",
-        "nameZh": "中国东方航空（推荐，未出票）"
+        "nameZh": "中国东方航空"
       },
       "flightNumber": "MU5868",
-      "bookingStatus": "recommended",
-      "note": "推荐航班。未指定乘坐人，不是已出票。",
+      "bookingStatus": "confirmed",
       "departure": {
         "airportCode": "CTU",
         "city": "成都",
@@ -255,90 +139,6 @@
         "airportName": "虹桥",
         "date": "2026-11-08",
         "time": "21:20",
-        "utcOffset": "+08:00"
-      }
-    },
-    {
-      "id": "flight-3u8995",
-      "journeyId": "rec-back-3u8995",
-      "sequence": 1,
-      "airline": {
-        "name": "Sichuan Airlines",
-        "nameZh": "四川航空（推荐，未出票）"
-      },
-      "flightNumber": "3U8995",
-      "bookingStatus": "recommended",
-      "note": "推荐航班。未指定乘坐人，不是已出票。",
-      "departure": {
-        "airportCode": "CTU",
-        "city": "成都",
-        "airportName": "双流T1",
-        "date": "2026-11-08",
-        "time": "18:40",
-        "utcOffset": "+08:00"
-      },
-      "arrival": {
-        "airportCode": "NKG",
-        "city": "南京",
-        "airportName": "禄口",
-        "date": "2026-11-08",
-        "time": "21:00",
-        "utcOffset": "+08:00"
-      }
-    },
-    {
-      "id": "flight-3u8709",
-      "journeyId": "rec-back-3u8709",
-      "sequence": 1,
-      "airline": {
-        "name": "Sichuan Airlines",
-        "nameZh": "四川航空（推荐，未出票）"
-      },
-      "flightNumber": "3U8709",
-      "bookingStatus": "recommended",
-      "note": "推荐航班。未指定乘坐人，不是已出票。",
-      "departure": {
-        "airportCode": "CTU",
-        "city": "成都",
-        "airportName": "双流T1",
-        "date": "2026-11-08",
-        "time": "19:20",
-        "utcOffset": "+08:00"
-      },
-      "arrival": {
-        "airportCode": "SZX",
-        "city": "深圳",
-        "airportName": "宝安",
-        "date": "2026-11-08",
-        "time": "21:40",
-        "utcOffset": "+08:00"
-      }
-    },
-    {
-      "id": "flight-ca4043",
-      "journeyId": "rec-back-ca4043",
-      "sequence": 1,
-      "airline": {
-        "name": "Air China",
-        "nameZh": "中国国际航空（推荐，未出票）"
-      },
-      "flightNumber": "CA4043",
-      "bookingStatus": "recommended",
-      "note": "推荐航班。未指定乘坐人，不是已出票。",
-      "departure": {
-        "airportCode": "CTU",
-        "city": "成都",
-        "airportName": "双流T2",
-        "date": "2026-11-08",
-        "time": "18:30",
-        "utcOffset": "+08:00"
-      },
-      "arrival": {
-        "airportCode": "WUH",
-        "city": "武汉",
-        "airportName": "天河",
-        "date": "2026-11-08",
-        "time": "20:25",
         "utcOffset": "+08:00"
       }
     }
@@ -381,7 +181,7 @@
           "id": "d1-arrive",
           "time": "14:00",
           "type": "drive",
-          "text": "抵达成都双流机场，机场取车自驾前往酒店。推荐航班（未指定乘坐人，不是已出票）：上海浦东—成都双流T2 CA8593 09:00–12:25；南京禄口—成都双流T1 3U8988 10:40–13:25；深圳宝安—成都双流T2 ZH9405 09:50–12:25；武汉天河—成都双流T2 CA4398 11:10–13:10。谁乘坐哪一班待确认。租车公司、车型、订单、费用、车牌和精确取还车时刻待确认。",
+          "text": "抵达成都双流机场，机场取车自驾前往酒店。去程上海浦东—成都双流T2 CA8593 09:00–12:25。租车公司、车型、订单、费用、车牌和精确取还车时刻待确认。",
           "placeIds": [
             "ctu",
             "donganhu"
@@ -540,9 +340,9 @@
         },
         {
           "id": "d4-fly",
-          "time": "18:30",
+          "time": "18:45",
           "type": "flight",
-          "text": "返程。推荐返程航班（未指定乘坐人，不是已出票）：成都双流T2—上海虹桥 MU5868 18:45–21:20；成都双流T1—南京禄口 3U8995 18:40–21:00；成都双流T1—深圳宝安 3U8709 19:20–21:40；成都双流T2—武汉天河 CA4043 18:30–20:25。谁乘坐哪一班待确认。",
+          "text": "返程。成都双流T2—上海虹桥 MU5868 18:45–21:20。",
           "placeId": "ctu"
         }
       ]
@@ -750,10 +550,6 @@
     ]
   },
   "issuesAndUncertainties": [
-    {
-      "id": "gap-flights",
-      "text": "去程和返程都是推荐航班，未指定谁坐哪一班，不是已出票。"
-    },
     {
       "id": "gap-rental",
       "text": "租车公司、车型、订单、费用、车牌和精确取还车时刻待确认。资料只写机场取车自驾。"
