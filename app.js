@@ -1062,7 +1062,11 @@ async function init() {
     if (moduleEnabled("driving")) renderRental();
     if (moduleEnabled("todo")) renderTravelPrep();
     if (moduleEnabled("ledger")) {
-      await window.TravelLedger?.init?.({ tripId: state.data.metadata.tripId, config: state.config });
+      await window.TravelLedger?.init?.({
+        tripId: state.data.metadata.tripId,
+        config: state.config,
+        roster: state.data.trip?.participants || []
+      });
     }
     startCountdowns();
     globalThis.tripLanguage?.apply(document.body);

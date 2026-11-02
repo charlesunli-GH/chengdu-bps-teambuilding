@@ -9,11 +9,15 @@
       "itinerary": true,
       "todo": true,
       "driving": false,
-      "ledger": false
+      "ledger": true
     },
     "language": "zh-CN",
     "persistence": {
-      "mode": "local"
+      "mode": "d1",
+      "apiBase": "/api/trip",
+      "sharedCollections": [
+        "ledger"
+      ]
     }
   },
   "metadata": {
@@ -836,6 +840,8 @@
           "lng": 104.5290374
         },
         "query": "平武报恩寺",
+        "localFeature": "明代古寺",
+        "featureSketch": "ming-temple",
         "overview": true
       },
       {
@@ -869,8 +875,7 @@
           "lat": 33.0676393,
           "lng": 103.8598763
         },
-        "query": "九寨沟原始森林",
-        "overview": true
+        "query": "九寨沟原始森林"
       },
       {
         "id": "arrow",
@@ -900,7 +905,10 @@
           "lat": 33.1605805,
           "lng": 103.8789338
         },
-        "query": "九寨沟五花海"
+        "query": "九寨沟五花海",
+        "localFeature": "日则沟彩池",
+        "featureSketch": "pools",
+        "overview": true
       },
       {
         "id": "pearl",
@@ -915,7 +923,10 @@
           "lat": 33.1684873,
           "lng": 103.8849784
         },
-        "query": "九寨沟珍珠滩瀑布"
+        "query": "九寨沟珍珠滩瀑布",
+        "localFeature": "滩上飞瀑",
+        "featureSketch": "pearl-falls",
+        "overview": true
       },
       {
         "id": "mirror",
@@ -946,6 +957,8 @@
           "lng": 103.9048159
         },
         "query": "九寨沟诺日朗",
+        "localFeature": "树正沟瀑布",
+        "featureSketch": "wide-falls",
         "overview": true
       },
       {
@@ -962,6 +975,8 @@
           "lng": 103.9273797
         },
         "query": "九寨沟长海",
+        "localFeature": "则查洼长海",
+        "featureSketch": "long-lake",
         "overview": true
       },
       {
@@ -977,7 +992,10 @@
           "lat": 33.0487153,
           "lng": 103.930395
         },
-        "query": "九寨沟五彩池"
+        "query": "九寨沟五彩池",
+        "localFeature": "则查洼彩池",
+        "featureSketch": "color-pools",
+        "overview": true
       },
       {
         "id": "rhino",
@@ -1022,8 +1040,7 @@
           "lat": 32.9308511,
           "lng": 104.0720436
         },
-        "query": "王朗国家级自然保护区",
-        "overview": true
+        "query": "王朗国家级自然保护区"
       },
       {
         "id": "baima",
@@ -1039,6 +1056,8 @@
           "lng": 104.3526565
         },
         "query": "平武白马藏寨",
+        "localFeature": "白马人家",
+        "featureSketch": "baima-village",
         "overview": true
       }
     ],
@@ -1230,7 +1249,7 @@
               "M647.14 172.34 C714.3 230.6 760.4 302.3 782.66 383.43 C848.6 346.1 899.3 293.9 931.59 229.91 C849.6 260.1 765.9 265.8 685.55 246.47 C705.8 225.8 718.9 201.2 724 174.24 C742.7 221.5 747.1 270.0 736.99 316.94 C803.2 281.8 854.7 231.5 888.27 169 C905.9 213.4 910.1 259.1 900.67 303.31 C881.2 248.0 848.3 202.3 803.86 169 C797.8 197.6 784.4 222.3 764.59 241.59 C795.1 247.8 824.9 245.2 852.21 234.03"
             ],
             "overviewPaths": [
-              "M647.14 172.34 C714.3 230.6 760.4 302.3 782.66 383.43 C840.0 321.1 875.9 248.2 888.27 169 C905.9 213.4 910.1 259.1 900.67 303.31 C891.1 274.9 874.6 251.4 852.21 234.03"
+              "M647.14 172.34 C667.6 193.7 680.7 218.9 685.55 246.47 C705.8 225.8 718.9 201.2 724 174.24 C779.3 156.0 835.2 154.2 888.27 169 C879.1 215.9 883.3 261.6 900.67 303.31 C854.3 267.3 821.4 221.7 803.86 169 C813.8 195.9 830.2 218.1 852.21 234.03"
             ]
           },
           {
@@ -1246,7 +1265,7 @@
               "M647.14 172.34 C691.0 237.3 748.9 285.1 817.52 313.18 C842.4 331.9 860.2 355.8 869.93 383.56 C813.5 537.6 786.7 696.7 791.1 851.34"
             ],
             "overviewPaths": [
-              "M647.14 172.34 C691.0 237.3 748.9 285.1 817.52 313.18 C842.4 331.9 860.2 355.8 869.93 383.56 C813.5 537.6 786.7 696.7 791.1 851.34"
+              "M647.14 172.34 C702.2 265.9 778.0 337.7 869.93 383.56 C872.7 547.6 845.9 706.6 791.1 851.34"
             ]
           }
         ],
@@ -1305,8 +1324,11 @@
             "size": 24,
             "anchor": "start",
             "lines": [
-              "平武·报恩寺"
+              "平武·报恩寺",
+              "明代古寺"
             ],
+            "localFeature": "明代古寺",
+            "featureSketch": "ming-temple",
             "query": "平武报恩寺",
             "geo": {
               "lat": 32.4111746,
@@ -1391,8 +1413,11 @@
             "size": 24,
             "anchor": "end",
             "lines": [
-              "五花海"
+              "五花海",
+              "日则沟彩池"
             ],
+            "localFeature": "日则沟彩池",
+            "featureSketch": "pools",
             "query": "九寨沟五花海",
             "geo": {
               "lat": 33.1605805,
@@ -1407,13 +1432,16 @@
             "x": 724,
             "y": 174.24,
             "color": "#618344",
-            "tx": 802,
-            "ty": 112.24,
+            "tx": 646,
+            "ty": 250.24,
             "size": 24,
-            "anchor": "start",
+            "anchor": "end",
             "lines": [
-              "珍珠滩瀑布"
+              "珍珠滩瀑布",
+              "滩上飞瀑"
             ],
+            "localFeature": "滩上飞瀑",
+            "featureSketch": "pearl-falls",
             "query": "九寨沟珍珠滩瀑布",
             "geo": {
               "lat": 33.1684873,
@@ -1428,8 +1456,8 @@
             "x": 736.99,
             "y": 316.94,
             "color": "#618344",
-            "tx": 658.99,
-            "ty": 392.94,
+            "tx": 598.99,
+            "ty": 418.94,
             "size": 24,
             "anchor": "end",
             "lines": [
@@ -1454,8 +1482,11 @@
             "size": 24,
             "anchor": "start",
             "lines": [
-              "诺日朗"
+              "诺日朗",
+              "树正沟瀑布"
             ],
+            "localFeature": "树正沟瀑布",
+            "featureSketch": "wide-falls",
             "query": "九寨沟诺日朗",
             "geo": {
               "lat": 33.164939,
@@ -1475,8 +1506,11 @@
             "size": 24,
             "anchor": "start",
             "lines": [
-              "长海"
+              "长海",
+              "则查洼长海"
             ],
+            "localFeature": "则查洼长海",
+            "featureSketch": "long-lake",
             "query": "九寨沟长海",
             "geo": {
               "lat": 33.0231485,
@@ -1491,13 +1525,16 @@
             "x": 803.86,
             "y": 169,
             "color": "#618344",
-            "tx": 725.86,
-            "ty": 107,
+            "tx": 941.86,
+            "ty": 81,
             "size": 24,
-            "anchor": "end",
+            "anchor": "start",
             "lines": [
-              "五彩池"
+              "五彩池",
+              "则查洼彩池"
             ],
+            "localFeature": "则查洼彩池",
+            "featureSketch": "color-pools",
             "query": "九寨沟五彩池",
             "geo": {
               "lat": 33.0487153,
@@ -1534,7 +1571,7 @@
             "y": 234.03,
             "color": "#618344",
             "tx": 930.21,
-            "ty": 172.03,
+            "ty": 310.03,
             "size": 24,
             "anchor": "start",
             "lines": [
@@ -1554,10 +1591,10 @@
             "x": 817.52,
             "y": 313.18,
             "color": "#209aaa",
-            "tx": 739.52,
-            "ty": 389.18,
+            "tx": 955.52,
+            "ty": 225.18,
             "size": 24,
-            "anchor": "end",
+            "anchor": "start",
             "lines": [
               "王朗保护区"
             ],
@@ -1580,8 +1617,11 @@
             "size": 24,
             "anchor": "end",
             "lines": [
-              "白马藏寨"
+              "白马藏寨",
+              "白马人家"
             ],
+            "localFeature": "白马人家",
+            "featureSketch": "baima-village",
             "query": "平武白马藏寨",
             "geo": {
               "lat": 32.7314314,
@@ -1597,11 +1637,11 @@
           "donganhu",
           "baoen",
           "jiuzhai-hotel",
-          "primeval",
+          "wuhua",
+          "pearl",
           "nuorilang",
           "changhai",
-          "shuzheng",
-          "wanglang",
+          "wucai",
           "baima"
         ],
         "dailyLayouts": {
@@ -1702,13 +1742,13 @@
                 "anchor": "end"
               },
               "pearl": {
-                "x": 802,
-                "y": 112.24,
-                "anchor": "start"
+                "x": 646,
+                "y": 250.24,
+                "anchor": "end"
               },
               "mirror": {
-                "x": 658.99,
-                "y": 392.94,
+                "x": 598.99,
+                "y": 418.94,
                 "anchor": "end"
               },
               "nuorilang": {
@@ -1722,9 +1762,9 @@
                 "anchor": "start"
               },
               "wucai": {
-                "x": 725.86,
-                "y": 107,
-                "anchor": "end"
+                "x": 941.86,
+                "y": 81,
+                "anchor": "start"
               },
               "rhino": {
                 "x": 686.59,
@@ -1733,7 +1773,7 @@
               },
               "shuzheng": {
                 "x": 930.21,
-                "y": 172.03,
+                "y": 310.03,
                 "anchor": "start"
               }
             },
@@ -1804,9 +1844,9 @@
                 "anchor": "end"
               },
               "wanglang": {
-                "x": 739.52,
-                "y": 389.18,
-                "anchor": "end"
+                "x": 955.52,
+                "y": 225.18,
+                "anchor": "start"
               },
               "baima": {
                 "x": 791.93,

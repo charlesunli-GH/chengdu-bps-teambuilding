@@ -566,7 +566,7 @@
   }
 
   function families() {
-    return ledgerData.settings.families || [];
+    return [];
   }
 
   function familyOwning(memberId, exceptFamilyId = "") {
@@ -1111,7 +1111,6 @@
             <button class="ledger-add-person" type="button" data-ledger-action="open-members" aria-label="添加同行人"><span aria-hidden="true">＋</span><small>添加</small></button>
           </div>
         </section>
-        ${renderFamilySection()}
         ${renderBillForm()}
         ${renderBillList()}
       </section>`;
@@ -1383,7 +1382,6 @@
         ${renderEntryPage()}
         ${renderStatsPage()}
         ${renderMembersDialog()}
-        ${renderFamiliesDialog()}
         ${renderSettingsDialog()}
         ${renderCurrencyDialog()}
       </div>`;
@@ -1432,6 +1430,7 @@
         : "";
     return `<div class="ledger-portability" aria-label="移植记账">
       <div class="ledger-portability-actions">
+        <button class="ledger-icon-button" type="button" data-ledger-action="sync-ledger">同步</button>
         <button class="ledger-icon-button" type="button" data-ledger-action="copy-ledger">复制记账</button>
         <button class="ledger-icon-button" type="button" data-ledger-action="paste-ledger">粘贴记账</button>
       </div>
@@ -2191,22 +2190,8 @@
     } else if (action === "open-members") {
       captureBillDraft();
       showDialog("members");
-    } else if (action === "open-families") {
-      captureBillDraft();
-      editingFamilyId = null;
-      showDialog("families");
-    } else if (action === "edit-family") {
-      captureBillDraft();
-      editingFamilyId = button.dataset.ledgerId || null;
-      openDialogName = "families";
-      renderApp();
-      requestAnimationFrame(() => ledgerRoot.querySelector('[data-ledger-form="family-save"] input[name="name"]')?.focus());
-    } else if (action === "cancel-family-edit") {
-      editingFamilyId = null;
-      openDialogName = "families";
-      renderApp();
-    } else if (action === "delete-family") {
-      deleteFamily(button.dataset.ledgerId || "");
+    } else if (action === "open-families" || action === "edit-family" || action === "cancel-family-edit" || action === "delete-family") {
+      return;
     } else if (action === "open-settings") {
       captureBillDraft();
       showDialog("settings");
@@ -2271,6 +2256,10 @@
       copyLedger();
       return;
     }
+    if (action === "sync-ledger") {
+      void syncSharedLedger();
+      return;
+    }
     const insideNoteForm = button.closest('[data-ledger-form="bill-note"]');
     if (editingNoteBillId
       && !insideNoteForm
@@ -2327,7 +2316,6 @@
     if (form.dataset.ledgerForm === "bill") await submitBill(form);
     if (form.dataset.ledgerForm === "member-add") await submitMemberAdd(form);
     if (form.dataset.ledgerForm === "member-edit") await submitMemberEdit(form);
-    if (form.dataset.ledgerForm === "family-save") await submitFamily(form);
   }
 
   function handleRootKeydown(event) {
@@ -2381,6 +2369,123 @@
       globalThis.localStorage?.setItem(localLedgerUploadMarkerKey(), "1");
     } catch (error) {
       console.error("TravelLedger could not remember the local ledger upload", error);
+    }
+  }
+
+  function stableTravelerId(name) {
+    let hash = 2166136261;
+    const text = String(name || "").trim();
+    for (let index = 0; index < text.length; index += 1) {
+      hash ^= text.codePointAt(index);
+      hash = Math.imul(hash, 16777619);
+    }
+    return `person-${(hash >>> 0).toString(16).padStart(8, "0")}`;
+  }
+
+  function rosterFromNames(names) {
+    const unique = [];
+    const seen = new Set();
+    for (const value of Array.isArray(names) ? names : []) {
+      const name = String(value || "").trim().slice(0, 30);
+      if (!name || seen.has(name)) continue;
+      seen.add(name);
+      unique.push(name);
+    }
+    return unique.slice(0, 40).map((name, index) => ({
+      id: stableTravelerId(name),
+      name,
+      initial: avatarInitial(name),
+      color: AVATAR_COLORS[index % AVATAR_COLORS.length]
+    }));
+  }
+
+  async function readLegacyLocalLedger() {
+    const localAdapter = createLocalStorageAdapter(ledgerTripId, { storageKey: legacyLocalLedgerKey() });
+    try {
+      return normalizeData(await Promise.resolve(localAdapter.load()));
+    } catch (error) {
+      console.error("TravelLedger could not read the local ledger", error);
+      return normalizeData(null);
+    }
+  }
+
+  async function uploadLedgerOnce(payload) {
+    const saved = await Promise.resolve(ledgerAdapter.save(payload, { tripId: ledgerTripId }));
+    rememberLocalLedgerUploaded();
+    return normalizeData(saved || payload);
+  }
+
+  async function ensureTripRoster(stored, names) {
+    const data = normalizeData(stored);
+    if (data.travelers.length || data.bills.length || localLedgerWasUploaded()) return stored;
+    const roster = rosterFromNames(names);
+    if (!roster.length) return stored;
+    const next = { ...data, travelers: roster, updatedAt: new Date().toISOString() };
+    if (globalThis.tripAccess?.canEdit?.() === false) return next;
+    try {
+      const saved = await uploadLedgerOnce(next);
+      if (!notice) notice = "已把这台浏览器的记账上传到共享账本。";
+      return saved;
+    } catch (error) {
+      console.error("TravelLedger could not upload the trip roster", error);
+      notice = "本机记账还没能上传，共享账本仍是空的。";
+      return next;
+    }
+  }
+
+  async function syncSharedLedger() {
+    if (ledgerPersistenceMode !== "d1") {
+      setNotice("当前账本只保存在这台浏览器。");
+      return;
+    }
+    setNotice("正在和云端对齐…");
+    try {
+      await enqueueMutation(async () => {
+        let remote;
+        try {
+          remote = await Promise.resolve(ledgerAdapter.load({ tripId: ledgerTripId }));
+        } catch (error) {
+          console.error("TravelLedger could not read the shared ledger", error);
+          sharedLedgerReady = false;
+          setNotice("共享账本暂时无法读取，没有写入。");
+          return;
+        }
+        sharedLedgerReady = true;
+        const remoteData = normalizeData(remote);
+        if (remoteData.travelers.length || remoteData.bills.length || localLedgerWasUploaded()) {
+          ledgerData = remoteData;
+          editingBillId = null;
+          editingMemberId = null;
+          editingNoteBillId = null;
+          billDraft = null;
+          notice = remoteData.travelers.length || remoteData.bills.length ? "已与云端对齐。" : "云端账本是空的。";
+          renderApp();
+          return;
+        }
+        const current = normalizeData(ledgerData);
+        const payload = current.travelers.length || current.bills.length ? current : await readLegacyLocalLedger();
+        if (!payload.travelers.length && !payload.bills.length) {
+          ledgerData = remoteData;
+          notice = "云端和本机都还没有账。";
+          renderApp();
+          return;
+        }
+        if (globalThis.tripAccess?.canEdit?.() === false) {
+          setNotice("当前是只读，不能把本机账上传。");
+          return;
+        }
+        try {
+          ledgerData = await uploadLedgerOnce(payload);
+          notice = "已把这台浏览器的记账上传到共享账本。";
+          renderApp();
+        } catch (error) {
+          console.error("TravelLedger could not upload the local ledger", error);
+          setNotice("本机记账还没能上传，共享账本仍是空的。");
+        }
+      });
+    } catch (error) {
+      console.error("TravelLedger could not sync", error);
+      setNotice("共享账本暂时无法读取，没有写入。");
     }
   }
 
@@ -2445,6 +2550,9 @@
     }
     if (cloudLoaded && ledgerPersistenceMode === "d1") {
       stored = await adoptLocalLedgerIfCloudEmpty(stored);
+    }
+    if (cloudLoaded || ledgerPersistenceMode !== "d1") {
+      stored = await ensureTripRoster(stored, options.roster);
     }
     sharedLedgerReady = !(ledgerPersistenceMode === "d1" && !cloudLoaded);
     ledgerData = normalizeData(stored);
